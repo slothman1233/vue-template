@@ -1,0 +1,44 @@
+<!--
+ * @Description:
+ * @Version: 0.1
+ * @Author: EveChee
+ * @Date: 2020-05-27 14:57:52
+ * @LastEditTime: 2020-06-05 08:58:14
+-->
+<template>
+  <el-dropdown @command="handleCommand">
+      <div class="self-info">
+        <el-avatar size="large"> Admin </el-avatar>
+        <i class="el-icon-arrow-down el-icon--right"></i>
+      </div>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
+@Component({
+  name: 'SelfInfo',
+})
+export default class SelfInfo extends Vue {
+  handleCommand(command){
+    this[command]()
+  }
+
+  logout(){
+    localStorage.removeItem('huihun_token')
+    this.$router.push('/login')
+  }
+}
+</script>
+
+<style scoped lang="less">
+.self-info {
+  .flex(flex-start);
+  margin-left: 10px;
+  cursor:pointer;
+}
+</style>
