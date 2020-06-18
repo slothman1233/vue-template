@@ -22,7 +22,7 @@ PS:(多人合作时要写什么小轮子的时候 先去公共部分看看队友
 ├── src
 │   ├── common
 │   │   ├── filters     // 公共过滤器
-│   │   ├── mixins      // 公共Mixin
+│   │   ├── mixins      //` 公共Mixin
 │   │   │   ├── dialog.mixin.ts // 弹窗
 │   │   │   ├── page.mixin.ts  // 分页列表
 │   │   │   └── tool.mixin.ts  // 基础部分
