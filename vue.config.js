@@ -2,7 +2,7 @@
 // const CopyPlugin = require('copy-webpack-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 const path = require('path')
-
+const {externals, cdn} = require('./ex.config')
 const config = {
   configureWebpack: {
     devServer: {
@@ -20,6 +20,18 @@ const config = {
     plugins: [
       new WebpackAssetsManifest(),
     ],
+    externals
+  },
+  chainWebpack: config => {
+    config.plugin("html").tap(args => {
+      if (process.env.NODE_ENV === "production") {
+        args[0].cdn = cdn.build;
+      }
+      if (process.env.NODE_ENV === "development") {
+        args[0].cdn = cdn.dev;
+      }
+      return args;
+    });
   },
   filenameHashing: false,
   pluginOptions: {
