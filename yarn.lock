@@ -12222,10 +12222,10 @@ vue-cli-plugin-single-spa@~1.1.0:
   resolved "https://registry.npm.taobao.org/vue-cli-plugin-single-spa/download/vue-cli-plugin-single-spa-1.1.0.tgz#76b3dd189fd149afe4fe05312439262e4ac58af0"
   integrity sha1-drPdGJ/RSa/k/gUxJDkmLkrFivA=
 
-vue-cli-plugin-stlmfe@~1.0.12:
-  version "1.0.12"
-  resolved "https://registry.npm.taobao.org/vue-cli-plugin-stlmfe/download/vue-cli-plugin-stlmfe-1.0.12.tgz#66a52d34a004876d3603b5f572b59c1d9d1302c0"
-  integrity sha1-ZqUtNKAEh202A7X1crWcHZ0TAsA=
+vue-cli-plugin-stlmfe@~1.0.13:
+  version "1.0.13"
+  resolved "https://registry.npm.taobao.org/vue-cli-plugin-stlmfe/download/vue-cli-plugin-stlmfe-1.0.13.tgz?cache=0&sync_timestamp=1592545731530&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-cli-plugin-stlmfe%2Fdownload%2Fvue-cli-plugin-stlmfe-1.0.13.tgz#3425c6af1831a42549a1d46cabb0a65557c6b788"
+  integrity sha1-NCXGrxgxpCVJodRsq7CmVVfGt4g=
 
 vue-cli-plugin-style-resources-loader@~0.1.4:
   version "0.1.4"
