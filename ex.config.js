@@ -9,12 +9,12 @@ const EX_CONFIG = {
   ]),
 
   DEV_CDN_LIST: [
-    "https://cdn.bootcss.com/vue/2.6.11/vue.js",
-    "https://cdn.bootcss.com/vue-router/3.1.6/vue-router.js",
-    "https://cdn.bootcss.com/vuex/3.1.3/vuex.js",
-    "https://cdn.bootcss.com/axios/0.19.2/axios.js",
-    "https://lib.baomitu.com/echarts/4.7.0/echarts.js",
-    "https://unpkg.com/element-ui@2.13.2/lib/index.js"
+    // "https://cdn.bootcss.com/vue/2.6.11/vue.js",
+    // "https://cdn.bootcss.com/vue-router/3.1.6/vue-router.js",
+    // "https://cdn.bootcss.com/vuex/3.1.3/vuex.js",
+    // "https://cdn.bootcss.com/axios/0.19.2/axios.js",
+    // "https://lib.baomitu.com/echarts/4.7.0/echarts.js",
+    // "https://unpkg.com/element-ui@2.13.2/lib/index.js"
   ],
   PROD_CDN_LIST: [
     "https://cdn.bootcss.com/vue/2.6.11/vue.min.js",

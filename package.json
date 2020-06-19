@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production",
+    "build:mfe": "vue-cli-service build --mode production --ex=1,2,3,4,5,6",
     "test": "jest",
     "lint": "vue-cli-service lint"
   },
