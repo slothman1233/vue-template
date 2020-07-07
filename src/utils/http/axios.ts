@@ -10,6 +10,7 @@ import axios, { AxiosInstance, AxiosResponse } from 'axios'
 import { Message } from 'element-ui'
 // 控制跳转中心
 import router from '@/router'
+import { ResponseData } from '.'
 
 const BASE_URL = ''
 // const BASE_URL = '/api'
@@ -39,7 +40,7 @@ export default class Intercept {
     // 响应拦截器
     this.instance.interceptors.response.use(
       // 请求成功
-      res => this.checkCode(this.checkStatus(res)),
+      res => (this.checkCode(this.checkStatus(res)) as any),
       // 请求失败
       error => {
         const { response } = error
@@ -52,22 +53,25 @@ export default class Intercept {
     )
   }
 
-  checkCode = (res: any) => {
+  checkCode = (res: any): ResponseData | undefined => {
     // 如果code异常(这里已经包括网络错误，服务器错误，后端抛出的错误)，可以弹出一个错误提示，告诉用户
     const { data, status, msg, config } = res
-    if (status === -404) return Message.error(msg)
-    if (!data) return false
+    if (status === -404){
+      Message.error(msg)
+      return
+    }
+    if (!data)return
     const codes = config?.codes || {}
     // 兼容后端code不规范
     data.code = +data.code
     if (data.code !== 0 || (codes.sures && !this.codeEqual(codes.sures, data.subCode))) {
       // 失败 并且不在自行处理code里面的
-      return !this.codeEqual(codes.errs, data.subCode) && Message.error(data.message) ? false : data
+      return !this.codeEqual(codes.errs, data.subCode) && Message.error(data.message) ? undefined : data
     }
     // 成功
     try {
       data.bodyMessage = data.bodyMessage ? JSON.parse(data.bodyMessage) : null
-    } catch(e){
+    } catch (e) {
       console.log('bodyMessage not a JSON Data!')
     }
     return data

@@ -3,7 +3,7 @@
  * @Version: 0.1
  * @Author: EveChee
  * @Date: 2020-05-08 14:40:09
- * @LastEditTime: 2020-07-07 10:00:05
+ * @LastEditTime: 2020-07-07 10:27:31
  */
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { merge, toPairs } from 'lodash'
@@ -48,10 +48,10 @@ class HttpService {
   /**
    * @description: Get
    * @param {type}
-   * @return: Promise<AxiosResponse<any>>
+   * @return: Promise<ResponseData | undefined>
    * @author: EveChee
    */
-  public get(url: string, options: AxiosOptions): Promise<AxiosResponse<any>> {
+  public get(url: string, options: AxiosOptions): Promise<ResponseData | undefined> {
     const { queryType = 'text', data, params } = options
     if (queryType === 'text') {
       options.params = params || data
@@ -65,10 +65,10 @@ class HttpService {
   /**
    * @description: Post
    * @param {type}
-   * @return: Promise<AxiosResponse<any>>
+   * @return: Promise<ResponseData | undefined>
    * @author: EveChee
    */
-  public post(url: string, data?: any, options: AxiosOptions = {}): Promise<AxiosResponse<any>> {
+  public post(url: string, data?: any, options: AxiosOptions = {}): Promise<ResponseData | undefined> {
     const { queryType } = options
     options.data = this.queryParse(data, queryType)
     const opts: AxiosOptions = this.checkMsgPack(options, { headers: this.normalHeader })
@@ -78,10 +78,10 @@ class HttpService {
   /**
    * @description: Put
    * @param {type}
-   * @return: Promise<AxiosResponse<any>>
+   * @return: Promise<ResponseData | undefined>
    * @author: EveChee
    */
-  public put(url: string, data?: any, options: AxiosOptions = {}): Promise<AxiosResponse<any>> {
+  public put(url: string, data?: any, options: AxiosOptions = {}): Promise<ResponseData | undefined> {
     const { queryType } = options
     if (queryType === 'text') {
       options.params = data
@@ -100,7 +100,7 @@ class HttpService {
    * @return: Promise<AxiosResponse<any>>
    * @author: EveChee
    */
-  public delete(url: string, options: AxiosOptions = {}): Promise<AxiosResponse<any>> {
+  public delete(url: string, options: AxiosOptions = {}): Promise<ResponseData | undefined> {
     const { queryType, data } = options
     options.params = this.queryParse(data, queryType)
     const opts: AxiosOptions = this.checkMsgPack(options, { headers: this.normalHeader })
@@ -124,10 +124,10 @@ class HttpService {
       issue: https://github.com/axios/axios/issues/2813
       */
       dataOpts = JSON.stringify(data)
-    } else if(type === 'forms'){
+    } else if (type === 'forms') {
       dataOpts = qs.stringify(data)
       console.log(dataOpts)
-    }else {
+    } else {
       dataOpts = data
     }
     return dataOpts
@@ -164,4 +164,10 @@ interface AxiosOptions extends DataOptions {
 interface Codes {
   sures?: Array<string>
   err?: Array<string>
+}
+
+export interface ResponseData {
+  code: number | string
+  subCode: string
+  bodyMessage: string | object
 }
