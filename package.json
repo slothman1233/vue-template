@@ -29,6 +29,7 @@
     "es6-promise": "^4.2.8",
     "lodash": "^4.17.15",
     "moment": "^2.26.0",
+    "normalize.css": "^8.0.1",
     "postcss-plugin-namespace": "^0.0.2",
     "qs": "^6.9.4",
     "querystring": "^0.2.0",

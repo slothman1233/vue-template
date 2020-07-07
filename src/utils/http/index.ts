@@ -3,7 +3,7 @@
  * @Version: 0.1
  * @Autor: EveChee
  * @Date: 2020-05-08 14:40:09
- * @LastEditTime: 2020-06-18 11:30:37
+ * @LastEditTime: 2020-05-09 14:30:06
  */
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { merge, toPairs } from 'lodash'
@@ -117,7 +117,7 @@ class HttpService {
           ? form.append(key, val)
           : val.forEach(item => form.append(`${key}[]`, item))
       })
-      dataOpts = form
+      // dataOpts = form
     } else if (type === 'json') {
       /*
       axios 未解决的 数组变键值对BUG 起因是 util.deepMerge函数错误
@@ -126,6 +126,7 @@ class HttpService {
       dataOpts = JSON.stringify(data)
     } else if(type === 'forms'){
       dataOpts = qs.stringify(data)
+      console.log(dataOpts)
     }else {
       dataOpts = data
     }
