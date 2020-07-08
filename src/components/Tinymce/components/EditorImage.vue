@@ -1,3 +1,10 @@
+<!--
+ * @Description:
+ * @Version: 0.1
+ * @Author: EveChee
+ * @Date: 2020-07-07 09:36:15
+ * @LastEditTime: 2020-07-08 10:47:21
+-->
 <template>
   <div class="upload-container">
     <el-upload
@@ -13,7 +20,11 @@
 </template>
 
 <script lang="ts">
-import { UploadImg } from '@/common/services/ArticleService'
+// import { UploadImg } from '@/common/services/ArticleService'
+function UploadImg(opts: any) {
+  // 上传图片的方法
+  return opts
+}
 export default {
   name: 'EditorSlideUpload',
   props: {
@@ -30,33 +41,30 @@ export default {
   },
   methods: {
     beforeAvatarUpload(file) {
-      const _this = this
       const fileName = file.uid
       let imgUrlBase64
       let reader = new FileReader()
       reader.readAsDataURL(file)
-      reader.onload = function(e) {
-        imgUrlBase64 = e.target.result //转换后的文件数据存储在e.target.result中
-        setTimeout(async () => {
-          let params = {
-            base64: imgUrlBase64,
-            Extension: 'png',
-            GetInfo: true,
-          }
-          const res = await UploadImg(params)
-          if (!res) return
-          let data = res.bodyMessage
-          let arr = [
-            {
-              hasSuccess: false,
-              uid: file.uid,
-              width: data.width,
-              height: data.height,
-              url: data.url,
-            },
-          ]
-          _this.$emit('successCBK', arr)
-        }, 0)
+      reader.onload = async e => {
+        imgUrlBase64 = e.target?.result //转换后的文件数据存储在e.target.result中
+        let params = {
+          base64: imgUrlBase64,
+          Extension: 'png',
+          GetInfo: true,
+        }
+        const res = await UploadImg(params)
+        if (!res) return
+        let data = res.bodyMessage
+        let arr = [
+          {
+            hasSuccess: false,
+            uid: file.uid,
+            width: data.width,
+            height: data.height,
+            url: data.url,
+          },
+        ]
+        ;(this as any).$emit('successCBK', arr)
       }
     },
   },

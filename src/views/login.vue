@@ -90,7 +90,7 @@ export default class Login extends Vue {
       this.passwordType = 'password'
     }
     this.$nextTick(() => {
-      this.$refs.password.focus()
+      (this.$refs.password as HTMLElement).focus()
     })
   }
 
@@ -147,16 +147,6 @@ export default class Login extends Vue {
   border-radius: 5px;
   color: #454545;
 }
-// #page-login {
-//   background: url('../assets/bg.jpg') no-repeat center center fixed;
-//   background-color: #2d3a4b;
-//   width: 100%;
-//   height: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-
 </style>
 
 <style lang="less" scoped>

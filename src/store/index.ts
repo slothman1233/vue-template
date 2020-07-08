@@ -1,16 +1,10 @@
-/*
- * @Description:
- * @Version: 0.1
- * @Author: EveChee
- * @Date: 2020-05-08 10:38:53
- * @LastEditTime: 2020-05-28 09:59:33
- */
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, { StoreOptions } from 'vuex'
+import modules from './modules'
+import { RootState } from './types'
 import { CHANGE_NETWORK } from './mutation-types'
 Vue.use(Vuex)
-
-export default new Vuex.Store({
+const store: StoreOptions<RootState> = {
   state: {
     networkStatus: null, // 当前网络状态
   },
@@ -21,5 +15,7 @@ export default new Vuex.Store({
     },
   },
   actions: {},
-  modules: {},
-})
+  modules,
+}
+
+export default new Vuex.Store(store)

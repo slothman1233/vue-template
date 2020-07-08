@@ -3,7 +3,7 @@
  * @Version: 0.1
  * @Author: EveChee
  * @Date: 2020-06-15 11:33:27
- * @LastEditTime: 2020-06-15 11:33:28
+ * @LastEditTime: 2020-07-08 10:32:17
 -->
 <template>
   <el-dialog
@@ -68,7 +68,6 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
 import { generatorAEDialog } from '@/common/mixins/dialog.mixin'
-import {editArticle} from '@/common/services/ArticleService'
 import Tinymce from '@/components/Tinymce/index.vue'
 const addFun = () => {
   console.log(1)
@@ -76,7 +75,11 @@ const addFun = () => {
 const editFun = () => {
   console.log(2)
 }
-const AEDialog = generatorAEDialog(addFun, editArticle)
+const AEDialog = generatorAEDialog(
+  addFun,
+  // 这里是编辑的方法
+  function() {}
+)
 @Component({
   name: 'EditArticle',
   components: { Tinymce },
@@ -136,9 +139,8 @@ export default class EditArticle extends AEDialog {
       chapterSummary: [
         { required: this.isPost, message: '封面专题必须填写摘要', trigger: 'change' },
         { min: 0, max: 120, message: `长度在0-120个字`, trigger: 'change' },
-      ]
+      ],
     }
-    console.log(111, rule)
     return rule
   }
 }

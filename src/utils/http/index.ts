@@ -3,7 +3,7 @@
  * @Version: 0.1
  * @Author: EveChee
  * @Date: 2020-05-08 14:40:09
- * @LastEditTime: 2020-07-07 10:27:31
+ * @LastEditTime: 2020-07-08 10:19:18
  */
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { merge, toPairs } from 'lodash'
@@ -169,5 +169,5 @@ interface Codes {
 export interface ResponseData {
   code: number | string
   subCode: string
-  bodyMessage: string | object
+  bodyMessage: any
 }
