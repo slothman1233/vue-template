@@ -48,7 +48,7 @@
     "vuex": "^3.1.3",
     "vuex-class": "^0.3.2",
     "webpack-assets-manifest": "^3.1.1",
-    "@stl/power-plugin": "^0.1.2"
+    "@stl/power-plugin": "^0.1.5"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
