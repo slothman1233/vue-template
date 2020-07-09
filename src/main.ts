@@ -1,17 +1,17 @@
 import './set-public-path'
 import singleSpaVue from 'single-spa-vue-mfe'
-import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
+import Vue from 'vue'
+import App from './App.vue'
+import router, { routes } from './router'
 import store from './store'
 import ElementUI from 'element-ui'
-// import 'normalize.css/normalize.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/common/style/reset.less'
-import '@/common/style/index.less'
+// import '@/common/style/index.less'
 import '@/common/icons'
+
 Vue.use(ElementUI)
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
 
 
 const options = {

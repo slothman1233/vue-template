@@ -26,12 +26,12 @@ export default class Logo extends Vue {}
   .flex(flex-start);
   box-sizing: border-box;
   padding: 0 20px;
-  color: #0FFAD0;
+  color: @menuText;
   font-size: 26px;
   .logo-img {
     height: 64px;
     width:64px;
-    background: #0FFAD0;
+    background: @menuBg;
     border-radius: 8px;
     margin-right:15px;
   }

@@ -24,6 +24,8 @@ module.exports = {
     'arrow-parens': 0,
     'object-curly-newline': 0,
     'class-methods-use-this': 0,
+    "@typescript-eslint/no-inferrable-types": 0,
+    "@typescript-eslint/type-annotation-spacing": 0,
     indent: 0,
     '@typescript-eslint/no-var-requires': 0,
     '@typescript-eslint/camelcase': 0,

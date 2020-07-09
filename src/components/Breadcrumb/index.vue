@@ -6,25 +6,34 @@
  * @LastEditTime: 2020-06-04 15:15:14
 -->
 <template>
-  <el-breadcrumb separator="/" class="bread">
-    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-    <el-breadcrumb-item
-      v-for="(item, i) in breadList"
-      :key="i"
-      :to="item.path ? { path: item.path } : false"
-      >{{ item.meta.title }}</el-breadcrumb-item
-    >
-  </el-breadcrumb>
+  <div class="bread-box">
+    <i :class="collapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'" @click="toggleSideBar"></i>
+    <el-breadcrumb separator="/" class="bread">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item
+        v-for="(item, i) in breadList"
+        :key="i"
+        :to="item.path ? { path: item.path } : false"
+        >{{ item.meta.title }}</el-breadcrumb-item
+      >
+    </el-breadcrumb>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Watch } from 'vue-property-decorator'
+import { Component, Watch, Prop } from 'vue-property-decorator'
 import { RouteRecord } from 'vue-router'
 @Component({
   name: 'Breadcrumb',
 })
 export default class Breadcrumb extends Vue {
+  @Prop()
+  collapse!: boolean
+
+  toggleSideBar() {
+    this.$emit('toggleSideBar')
+  }
   breadList: RouteRecord[] = []
 
   @Watch('$route')
@@ -53,8 +62,14 @@ export default class Breadcrumb extends Vue {
 </script>
 
 <style scoped lang="less">
-.bread {
+.bread-box {
   background: #fff;
-  padding-left:20px;
+  padding-left: 20px;
+  .flex(flex-start);
+  i {
+    margin-right: 10px;
+    cursor:pointer;
+    color:@menuText;
+  }
 }
 </style>

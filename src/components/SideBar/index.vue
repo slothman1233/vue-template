@@ -6,8 +6,7 @@
  * @LastEditTime: 2020-06-15 10:13:41
 -->
 <template>
-  <div class="side-bar">
-    <Logo></Logo>
+  <div class="side-bar" :class="{collapse}">
     <el-menu
       class="sidebar-menu"
       :default-active="activeMenu"
@@ -15,6 +14,7 @@
       :text-color="variables.menuText"
       :unique-opened="false"
       :active-text-color="variables.menuActiveText"
+      :collapse="collapse"
       :collapse-transition="false"
       mode="vertical"
       router
@@ -26,21 +26,24 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Component, Prop } from 'vue-property-decorator'
 import SideBarItem from './SideBarItem.vue'
 import Logo from './Logo.vue'
 import { routes } from '@/router'
+
 @Component({
   name: 'SideBar',
   components: { SideBarItem, Logo },
 })
 export default class SideBar extends Vue {
+  @Prop()
+  collapse!: boolean
   showLogo = false
 
   variables = {
-    menuBg: '#4065DF',
-    menuText: '#fff',
-    menuActiveText: '#0FFAD0',
+    menuBg: '#304156',
+    menuText: '#bfcbd9',
+    menuActiveText: '#409EFF',
   }
 
   parseRouteForBar(r, basePath = '/') {
@@ -115,10 +118,14 @@ interface NavChildrenData {
 <style scoped lang="less">
 .side-bar {
   height: 100%;
-  width: 260px;
-  background: #4065df;
+  background: @menuBg;
   padding: 20px 0;
   box-sizing: border-box;
+  width:210px;
+  transition: width .28s;
+  &.collapse{
+    width:auto !important;
+  }
   .sidebar-menu {
     height: 100%;
     border: none;

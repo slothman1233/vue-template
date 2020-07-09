@@ -24,17 +24,17 @@
           auto-complete="on"
         />
       </el-form-item>
-      <el-form-item prop="password">
+      <el-form-item prop="pwd">
         <span class="svg-container">
           <svg-icon icon-class="password" />
         </span>
         <el-input
           :key="passwordType"
           ref="password"
-          v-model="loginForm.password"
+          v-model="loginForm.pwd"
           :type="passwordType"
           placeholder="Password"
-          name="password"
+          name="pwd"
           tabindex="2"
           auto-complete="on"
           @keyup.enter.native="submitForm"
@@ -55,18 +55,20 @@
 <script lang="ts">
 import { login, saveToken } from '@/common/services/LoginService'
 import { Component, Vue, Watch } from 'vue-property-decorator'
+import { power } from '@/router'
+import http from '../utils/http'
 @Component({
   components: {},
 })
 export default class Login extends Vue {
   loginForm = {
-    username: 'chiyi',
-    password: 'chiyi123456',
+    username: 'admin0',
+    pwd: '123456',
   }
 
   rules = {
     username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-    password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+    pwd: [{ required: true, message: '请输入密码', trigger: 'blur' }],
     code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
   }
 
@@ -76,10 +78,10 @@ export default class Login extends Vue {
     const valid = await (this.$refs['login'] as any).validate().catch(e => console.log(e))
     if (!valid || this.loginLoading) return
     this.loginLoading = true
-    const res = await login(this.loginForm)
+    const res = await power.login(this.loginForm)
     this.loginLoading = false
     if (!res) return
-    saveToken(res.bodyMessage)
+    // saveToken(res.bodyMessage)
     this.$router.replace('/').catch(e => console.log(e))
   }
   passwordType = 'password'

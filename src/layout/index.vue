@@ -7,10 +7,11 @@
 -->
 <template>
   <div class="home-layout">
-    <SideBar />
+    <div class="aaa"></div>
+    <SideBar :collapse="isCollapse" />
     <div class="con-box">
       <HeaderNav />
-      <Breadcrumb />
+      <Breadcrumb :collapse="isCollapse" @toggleSideBar="toggleSideBar"/>
       <router-view class="app-con"></router-view>
     </div>
   </div>
@@ -23,12 +24,16 @@ import SideBar from '@/components/SideBar/index.vue'
 import HeaderNav from '@/components/HeaderNav/index.vue'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 
-
 @Component({
   name: 'HomeIndexLayOut',
   components: { SideBar, HeaderNav, Breadcrumb },
 })
-export default class HomeIndexLayOut extends Vue {}
+export default class HomeIndexLayOut extends Vue {
+  isCollapse = false
+  toggleSideBar(){
+    this.isCollapse = !this.isCollapse
+  }
+}
 </script>
 
 <style scoped lang="less">
@@ -46,7 +51,7 @@ export default class HomeIndexLayOut extends Vue {}
       flex: 1;
       overflow-y: auto;
       padding: 20px;
-      background:#fff;
+      background: #fff;
     }
   }
 }

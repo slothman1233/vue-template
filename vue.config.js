@@ -40,6 +40,7 @@ const config = {
       preProcessor: 'less',
       patterns: [
         path.resolve(__dirname, './src/common/style/PublicDefind.less'),
+        path.resolve(__dirname, './src/common/style/variables.less'),
       ],
     },
   },

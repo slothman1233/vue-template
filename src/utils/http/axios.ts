@@ -66,7 +66,7 @@ export default class Intercept {
     data.code = +data.code
     if (data.code !== 0 || (codes.sures && !this.codeEqual(codes.sures, data.subCode))) {
       // 失败 并且不在自行处理code里面的
-      return !this.codeEqual(codes.errs, data.subCode) && Message.error(data.message) ? undefined : data
+      return !this.codeEqual(codes.err, data.subCode) && Message.error(data.message) ? undefined : data
     }
     // 成功
     try {
@@ -77,7 +77,9 @@ export default class Intercept {
     return data
   }
 
-  codeEqual = (arr: any[], subCode: string) => arr.find(code => subCode.indexOf(code) !== -1)
+  codeEqual = (arr: any[], subCode: string) => {
+    return arr ? arr.find(code => subCode.indexOf(code) !== -1) : false
+  }
 
   checkStatus = (response: AxiosResponse) => {
     // loading

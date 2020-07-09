@@ -30,6 +30,9 @@ export default class HeaderNav extends Vue {}
   width: 100%;
   background: #fff;
   box-sizing: border-box;
-  padding: 20px 20px;
+  padding: 20px 20px 0 20px;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  z-index: 10;
+  margin-bottom:10px;
 }
 </style>

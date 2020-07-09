@@ -7,14 +7,18 @@
 -->
 <template>
   <el-dropdown @command="handleCommand">
-      <div class="self-info">
-        <el-avatar size="large"> Admin </el-avatar>
-        <i class="el-icon-arrow-down el-icon--right"></i>
-      </div>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item command="logout">退出登录</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+    <div class="self-info">
+      <el-avatar
+        size="large"
+        src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+      >
+      </el-avatar>
+      <i class="el-icon-arrow-down el-icon--right"></i>
+    </div>
+    <el-dropdown-menu slot="dropdown">
+      <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+    </el-dropdown-menu>
+  </el-dropdown>
 </template>
 
 <script lang="ts">
@@ -24,11 +28,11 @@ import { Component } from 'vue-property-decorator'
   name: 'SelfInfo',
 })
 export default class SelfInfo extends Vue {
-  handleCommand(command){
+  handleCommand(command) {
     this[command]()
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('huihun_token')
     this.$router.push('/login')
   }
@@ -39,6 +43,6 @@ export default class SelfInfo extends Vue {
 .self-info {
   .flex(flex-start);
   margin-left: 10px;
-  cursor:pointer;
+  cursor: pointer;
 }
 </style>

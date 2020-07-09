@@ -1,3 +1,10 @@
+<!--
+ * @Description:
+ * @Version: 0.1
+ * @Author: EveChee
+ * @Date: 2020-07-07 09:36:15
+ * @LastEditTime: 2020-07-08 17:56:20
+-->
 <template>
   <div class="power-home">
     <h3 class="dashbord-title">移动端：</h3>
@@ -28,7 +35,7 @@
         />
       </el-col>
     </el-row>
-    <h3 class="dashbord-title">PC端：</h3>
+    <h3 class="dashbord-title">PC端：{{ testBtn }}</h3>
     <el-row class="dashbord-box" :gutter="30" type="flex" justify="space-between">
       <el-col>
         <DashTab
@@ -66,11 +73,15 @@
 import { Component, Vue } from 'vue-property-decorator'
 import DashTab from './components/DashTab.vue'
 import Chart from './components/Chart.vue'
+import { power } from '@/router'
 @Component({
   name: 'Home',
-  components: { DashTab, Chart},
+  components: { DashTab, Chart },
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  @power.HasBtn('user:copy')
+  testBtn!: boolean
+}
 </script>
 
 <style scoped lang="less">
