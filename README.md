@@ -1,6 +1,17 @@
 # stl-vue-ts-template
 
-## 规范写在前面
+## 这一步一定要做
+```
+全局搜索appName
+除了变量级别 只要是字符串或样式匹配的 修改成你所对应项目命名
+约有 package.json name
+public -> index.html -> id="appName"
+set-public-path
+总之查到的地方字符串都改就行了  不多就几个
+但是不改 后续出现样式不生效的 看看是不是这一步没做
+```
+
+## 注意事项
 ```
 污染注意：
 ！！！尽可能的不污染window以及全局Vue或是其他的原型
