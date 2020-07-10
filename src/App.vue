@@ -1,22 +1,16 @@
-<!--
- * @Description:
- * @Version: 0.1
- * @Author: EveChee
- * @Date: 2020-06-18 11:19:26
- * @LastEditTime: 2020-06-18 11:22:53
--->
 <template>
-  <div id="huihun-admin">
+  <div id="appName">
     <router-view />
   </div>
 </template>
 <script lang="ts">
 import { NetWorkListener } from '@/common/mixins/tool.mixin'
-export default class App extends NetWorkListener {}
+import { Mixins } from 'vue-property-decorator'
+export default class App extends Mixins(NetWorkListener) {}
 </script>
 
 <style lang="less">
-#huihun-admin {
+#appName {
   height: 100%;
   min-height: 860px;
   min-width: 1200px;

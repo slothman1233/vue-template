@@ -1,15 +1,17 @@
 import './set-public-path'
 import singleSpaVue from 'single-spa-vue-mfe'
-import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
+import Vue from 'vue'
+import App from './App.vue'
+import router, { routes } from './router'
 import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/common/style/reset.less'
+// import '@/common/style/index.less'
+import '@/common/icons'
 
 Vue.use(ElementUI)
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
 
 
 const options = {
@@ -20,7 +22,7 @@ const options = {
 
 // 独立渲染
 export const render = function() {
-  new Vue(options).$mount('#huihun-admin')
+  new Vue(options).$mount('#appName')
 }
 // 微前端模式
 export const vueLifeCycles = ({ el }: any) => {
