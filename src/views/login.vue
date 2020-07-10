@@ -53,7 +53,6 @@
 </template>
 
 <script lang="ts">
-import { login, saveToken } from '@/common/services/LoginService'
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { power } from '@/router'
 import http from '../utils/http'

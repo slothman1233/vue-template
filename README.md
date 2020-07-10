@@ -66,7 +66,6 @@ set-public-path.ts 里面的路径要和package.json的项目名字一致
 │   │   │   └── tool.mixin.ts  // 基础部分
 │   │   ├── services    // 接口存放
 │   │   │   ├── BaseService.d.ts // 共用基础参数类型声明
-│   │   │   ├── LoginService.ts  // 示例
 │   │   │   └── UserService.ts   // 示例
 │   │   └── style      // 公共样式部分
 │   │       ├── listbox.less
