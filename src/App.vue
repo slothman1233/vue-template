@@ -1,5 +1,5 @@
 <template>
-  <div id="huihun-admin">
+  <div id="appName">
     <router-view />
   </div>
 </template>
@@ -10,7 +10,7 @@ export default class App extends Mixins(NetWorkListener) {}
 </script>
 
 <style lang="less">
-#huihun-admin {
+#appName {
   height: 100%;
   min-height: 860px;
   min-width: 1200px;

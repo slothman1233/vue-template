@@ -65,8 +65,8 @@ export default class Intercept {
     // 兼容后端code不规范
     data.code = +data.code
     if (data.code !== 0 || (codes.sures && !this.codeEqual(codes.sures, data.subCode))) {
-      // 失败 并且不在自行处理code里面的
-      return !this.codeEqual(codes.err, data.subCode) && Message.error(data.message) ? undefined : data
+      // 失败 并且在自行处理code里面的
+      return this.codeEqual(codes.err, data.subCode) && Message.error(data.message) ? undefined : data
     }
     // 成功
     try {

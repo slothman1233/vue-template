@@ -24,6 +24,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import {power} from '@/router'
 @Component({
   name: 'SelfInfo',
 })
@@ -33,8 +34,7 @@ export default class SelfInfo extends Vue {
   }
 
   logout() {
-    localStorage.removeItem('huihun_token')
-    this.$router.push('/login')
+    power.logout()
   }
 }
 </script>

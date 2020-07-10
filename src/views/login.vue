@@ -81,7 +81,6 @@ export default class Login extends Vue {
     const res = await power.login(this.loginForm)
     this.loginLoading = false
     if (!res) return
-    // saveToken(res.bodyMessage)
     this.$router.replace('/').catch(e => console.log(e))
   }
   passwordType = 'password'

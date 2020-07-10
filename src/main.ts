@@ -22,7 +22,7 @@ const options = {
 
 // 独立渲染
 export const render = function() {
-  new Vue(options).$mount('#huihun-admin')
+  new Vue(options).$mount('#appName')
 }
 // 微前端模式
 export const vueLifeCycles = ({ el }: any) => {
