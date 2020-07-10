@@ -3,13 +3,13 @@
  * @Version: 0.1
  * @Author: EveChee
  * @Date: 2020-05-30 15:10:16
- * @LastEditTime: 2020-06-05 10:14:57
+ * @LastEditTime: 2020-07-10 11:07:45
  */
 import http from '@/utils/http'
 
 // 账号列表查询——分页
 export const getUserListForPage = (params?: UserListPageParams) => {
-  return http.get('/api/User/GetPagedList', { params })
+  return http.get('/api/User/GetPagedList', { params, msgPack:true })
 }
 
 // 账号列表查询

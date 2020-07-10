@@ -124,10 +124,10 @@ export default class UserList extends PageSome {
   userList: Array<any> = [{}]
   async getList() {
     // 获取列表
-    // const res = await getUserListForPage(this.pageParams)
-    // if (!res) return
-    // this.userList = res.bodyMessage?.items
-    // this.total = res.bodyMessage?.TotalRecords || 0
+    const res = await getUserListForPage(this.pageParams)
+    if (!res) return
+    this.userList = res.bodyMessage?.items
+    this.total = res.bodyMessage?.TotalRecords || 0
   }
 
   // 编辑弹窗取消后还原备份数据
