@@ -29,31 +29,31 @@ const config = {
         devtool: debug ? 'cheap-module-eval-source-map' : "",
         externals,
         optimization: {
-            splitChunks: {
-                chunks: 'all',
-                minSize: 30000,
-                minChunks: 1,
-                maxAsyncRequests: 5,
-                maxInitialRequests: 3,
-                automaticNameDelimiter: '~',
-                name: true,
-                cacheGroups: {
-                    vendors: {
-                        name: "vendors",
-                        test: /[\\/]node_modules[\\/]/,
-                        minSize: 0,
-                        priority: 2
-                    },
+            // splitChunks: {
+            //     chunks: 'all',
+            //     minSize: 30000,
+            //     minChunks: 1,
+            //     maxAsyncRequests: 5,
+            //     maxInitialRequests: 3,
+            //     automaticNameDelimiter: '~',
+            //     name: true,
+            //     cacheGroups: {
+            //         vendors: {
+            //             name: "vendors",
+            //             test: /[\\/]node_modules[\\/]/,
+            //             minSize: 0,
+            //             priority: 2
+            //         },
 
-                    default: {
-                        name: "default",
-                        minChunks: 2,
-                        minSize: 0,
-                        priority: -20,
-                        reuseExistingChunk: true
-                    },
-                }
-            },
+            //         default: {
+            //             name: "default",
+            //             minChunks: 2,
+            //             minSize: 0,
+            //             priority: -20,
+            //             reuseExistingChunk: true
+            //         },
+            //     }
+            // },
         },
 
 

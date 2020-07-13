@@ -12260,15 +12260,10 @@ vue-class-component@^7.1.0, vue-class-component@^7.2.3:
   resolved "https://registry.npm.taobao.org/vue-class-component/download/vue-class-component-7.2.3.tgz#a5b1abd53513a72ad51098752e2dedd499807cca"
   integrity sha1-pbGr1TUTpyrVEJh1Li3t1JmAfMo=
 
-vue-cli-plugin-single-spa@~1.1.0:
-  version "1.1.0"
-  resolved "https://registry.npm.taobao.org/vue-cli-plugin-single-spa/download/vue-cli-plugin-single-spa-1.1.0.tgz#76b3dd189fd149afe4fe05312439262e4ac58af0"
-  integrity sha1-drPdGJ/RSa/k/gUxJDkmLkrFivA=
-
-vue-cli-plugin-stlmfe@~1.0.13:
-  version "1.0.13"
-  resolved "https://registry.npm.taobao.org/vue-cli-plugin-stlmfe/download/vue-cli-plugin-stlmfe-1.0.13.tgz?cache=0&sync_timestamp=1592545731530&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-cli-plugin-stlmfe%2Fdownload%2Fvue-cli-plugin-stlmfe-1.0.13.tgz#3425c6af1831a42549a1d46cabb0a65557c6b788"
-  integrity sha1-NCXGrxgxpCVJodRsq7CmVVfGt4g=
+vue-cli-plugin-stlmfe@~1.0.15:
+  version "1.0.15"
+  resolved "http://47.113.105.208:8088/vue-cli-plugin-stlmfe/-/vue-cli-plugin-stlmfe-1.0.15.tgz#195fa70e3ca50a4821137bb5aaf073999fc59720"
+  integrity sha512-dq+JBR4JsW1AxgKnuAuUyKDzdd8UtUEEyJo8bQUAbdw3qStTCKHPxEQzOD/g5qrsu0jRc1VRdp2LL9BoSwYXEw==
 
 vue-cli-plugin-style-resources-loader@~0.1.4:
   version "0.1.4"
@@ -12443,6 +12438,25 @@ webpack-bundle-analyzer@^3.6.1:
   version "3.7.0"
   resolved "https://registry.npm.taobao.org/webpack-bundle-analyzer/download/webpack-bundle-analyzer-3.7.0.tgz?cache=0&sync_timestamp=1586846559504&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fwebpack-bundle-analyzer%2Fdownload%2Fwebpack-bundle-analyzer-3.7.0.tgz#84da434e89442899b884d9ad38e466d0db02a56f"
   integrity sha1-hNpDTolEKJm4hNmtOORm0NsCpW8=
+  dependencies:
+    acorn "^7.1.1"
+    acorn-walk "^7.1.1"
+    bfj "^6.1.1"
+    chalk "^2.4.1"
+    commander "^2.18.0"
+    ejs "^2.6.1"
+    express "^4.16.3"
+    filesize "^3.6.1"
+    gzip-size "^5.0.0"
+    lodash "^4.17.15"
+    mkdirp "^0.5.1"
+    opener "^1.5.1"
+    ws "^6.0.0"
+
+webpack-bundle-analyzer@^3.8.0:
+  version "3.8.0"
+  resolved "http://47.113.105.208:8088/webpack-bundle-analyzer/-/webpack-bundle-analyzer-3.8.0.tgz#ce6b3f908daf069fd1f7266f692cbb3bded9ba16"
+  integrity sha1-zms/kI2vBp/R9yZvaSy7O97ZuhY=
   dependencies:
     acorn "^7.1.1"
     acorn-walk "^7.1.1"
