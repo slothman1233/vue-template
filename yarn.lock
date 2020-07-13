@@ -1322,11 +1322,12 @@
   resolved "https://registry.npm.taobao.org/@soda/get-current-script/download/@soda/get-current-script-1.0.0.tgz#623aa40623550e3b94767cffeb096a6fb597ed09"
   integrity sha1-YjqkBiNVDjuUdnz/6wlqb7WX7Qk=
 
-"@stl/power-plugin@^0.1.6":
-  version "0.1.6"
-  resolved "http://47.113.105.208:8088/@stl%2fpower-plugin/-/power-plugin-0.1.6.tgz#48bfb2ce22e0d9f1011f7db64e79a18f48e68c42"
-  integrity sha512-VcaM7P8GLBIhaxPp5lTwk5d766NY5mHdRqhb+iXE+dkt3f4EgEzo3vWmffgqz1zurBwmS4NO5Y2bLr57lj/uww==
+"@stl/power-plugin@^0.1.11":
+  version "0.1.11"
+  resolved "http://47.113.105.208:8088/@stl%2fpower-plugin/-/power-plugin-0.1.11.tgz#02874ecc8d8d23a9dd78202a5429b27062d51edf"
+  integrity sha512-g3auXUSGO5CzR+hIgIUOeH7iPnE3fLl15Nxrauvrb9T9MRz2idhKy5t1dNmjxFGXZTH3sqGZW4HEEv6HHsAvNg==
   dependencies:
+    "@stl/request" "^0.0.1"
     "@types/blueimp-md5" "^2.7.0"
     "@types/lodash" "^4.14.157"
     "@types/nprogress" "^0.2.0"
@@ -1338,6 +1339,17 @@
     qs "^6.9.4"
     vue "^2.6.11"
     vue-router "^3.1.6"
+    webpack "^4.43.0"
+
+"@stl/request@^0.0.1":
+  version "0.0.1"
+  resolved "http://47.113.105.208:8088/@stl%2frequest/-/request-0.0.1.tgz#17c474fbc45f4eb1950fa7b9602a2b57502d9231"
+  integrity sha512-3kc30pYANexAYKf0j0pFbOhLBK8YXSOX6prmz4r7Um0P1GkNOHqNE0vlridULHtdoKdcmH9qanXtgQGWNnc3qg==
+  dependencies:
+    "@types/lodash" "^4.14.157"
+    axios "^0.19.2"
+    lodash "^4.17.15"
+    qs "^6.9.4"
     webpack "^4.43.0"
 
 "@tinymce/tinymce-vue@^3.2.2":
