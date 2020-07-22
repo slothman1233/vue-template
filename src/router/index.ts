@@ -3,13 +3,13 @@
  * @Version: 0.1
  * @Author: EveChee
  * @Date: 2020-07-07 09:36:15
- * @LastEditTime: 2020-07-08 18:00:31
+ * @LastEditTime: 2020-07-22 15:36:29
  */
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Layout from '@/layout/index.vue'
 import 'nprogress/nprogress.css'
-import { PowerPlugin } from '@stl/power-plugin'
+import PowerPlugin from '@stl/power-plugin'
 Vue.use(VueRouter)
 
 export const routes: Array<RouteConfig> = [
