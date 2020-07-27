@@ -5,6 +5,7 @@
       :rules="rules"
       ref="login"
       class="login-form"
+          size="large"
       @keyup.enter.native="submitForm"
     >
       <div class="title-container">
@@ -162,7 +163,7 @@ export default class Login extends Vue {
 
   .login-form {
     position: relative;
-    width: 520px;
+    width: 450px;
     max-width: 100%;
     padding: 160px 35px 0;
     margin: 0 auto;
@@ -185,7 +186,6 @@ export default class Login extends Vue {
     padding: 6px 5px 6px 15px;
     color: @dark_gray;
     vertical-align: middle;
-    width: 30px;
     display: inline-block;
   }
 
