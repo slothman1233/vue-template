@@ -12,7 +12,7 @@
   "dependencies": {
     "@babel/core": "^7.9.6",
     "@babel/plugin-proposal-function-bind": "^7.8.3",
-    "@stl/power-plugin": "^0.1.17",
+    "@stl/power-plugin": "^0.1.21",
     "@stl/request": "^0.0.8",
     "@tinymce/tinymce-vue": "^3.2.2",
     "@types/blueimp-md5": "^2.7.0",
