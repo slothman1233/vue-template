@@ -1330,10 +1330,10 @@
   resolved "https://registry.npm.taobao.org/@soda/get-current-script/download/@soda/get-current-script-1.0.0.tgz#623aa40623550e3b94767cffeb096a6fb597ed09"
   integrity sha1-YjqkBiNVDjuUdnz/6wlqb7WX7Qk=
 
-"@stl/power-plugin@^0.1.17":
-  version "0.1.17"
-  resolved "http://47.113.105.208:8088/@stl%2fpower-plugin/-/power-plugin-0.1.17.tgz#a90ec2e3d5be28a649d574b3d79c95a3a7767a02"
-  integrity sha512-vZWVgen/btSzCuayOI4kHzirZpkQEIhXT38gEwDkpmvRV7hBJR7gLpj432xF274mdNTCue2FmMGuki0BHv1hyQ==
+"@stl/power-plugin@^0.1.21":
+  version "0.1.21"
+  resolved "http://47.113.105.208:8088/@stl%2fpower-plugin/-/power-plugin-0.1.21.tgz#4aff8f7d6fcc795dd7e8559bab7efade373663ab"
+  integrity sha512-vlTOLNtYBbwCcjBYNPqYl2mutBK1Hp+0dUVKjcfPXaaNYo/QQCb5DIprYexxHwu316ZkC/5ED28DQKfqXM9Ujg==
   dependencies:
     "@stl/request" "^0.0.8"
     "@types/blueimp-md5" "^2.7.0"
