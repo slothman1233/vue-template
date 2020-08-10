@@ -1325,6 +1325,42 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
+"@sinonjs/commons@^1", "@sinonjs/commons@^1.6.0", "@sinonjs/commons@^1.7.0", "@sinonjs/commons@^1.7.2":
+  version "1.8.1"
+  resolved "http://47.113.105.208:8088/@sinonjs%2fcommons/-/commons-1.8.1.tgz#e7df00f98a203324f6dc7cc606cad9d4a8ab2217"
+  integrity sha1-598A+YogMyT23HzGBsrZ1KirIhc=
+  dependencies:
+    type-detect "4.0.8"
+
+"@sinonjs/fake-timers@^6.0.0", "@sinonjs/fake-timers@^6.0.1":
+  version "6.0.1"
+  resolved "http://47.113.105.208:8088/@sinonjs%2ffake-timers/-/fake-timers-6.0.1.tgz#293674fccb3262ac782c7aadfdeca86b10c75c40"
+  integrity sha1-KTZ0/MsyYqx4LHqt/eyoaxDHXEA=
+  dependencies:
+    "@sinonjs/commons" "^1.7.0"
+
+"@sinonjs/formatio@^5.0.1":
+  version "5.0.1"
+  resolved "http://47.113.105.208:8088/@sinonjs%2fformatio/-/formatio-5.0.1.tgz#f13e713cb3313b1ab965901b01b0828ea6b77089"
+  integrity sha1-8T5xPLMxOxq5ZZAbAbCCjqa3cIk=
+  dependencies:
+    "@sinonjs/commons" "^1"
+    "@sinonjs/samsam" "^5.0.2"
+
+"@sinonjs/samsam@^5.0.2", "@sinonjs/samsam@^5.0.3":
+  version "5.0.3"
+  resolved "http://47.113.105.208:8088/@sinonjs%2fsamsam/-/samsam-5.0.3.tgz#86f21bdb3d52480faf0892a480c9906aa5a52938"
+  integrity sha1-hvIb2z1SSA+vCJKkgMmQaqWlKTg=
+  dependencies:
+    "@sinonjs/commons" "^1.6.0"
+    lodash.get "^4.4.2"
+    type-detect "^4.0.8"
+
+"@sinonjs/text-encoding@^0.7.1":
+  version "0.7.1"
+  resolved "http://47.113.105.208:8088/@sinonjs%2ftext-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
+  integrity sha1-jaXGUwkVZT86Hzj9XxAdjD+AecU=
+
 "@soda/friendly-errors-webpack-plugin@^1.7.1":
   version "1.7.1"
   resolved "https://registry.npm.taobao.org/@soda/friendly-errors-webpack-plugin/download/@soda/friendly-errors-webpack-plugin-1.7.1.tgz#706f64bcb4a8b9642b48ae3ace444c70334d615d"
@@ -1339,16 +1375,15 @@
   resolved "https://registry.npm.taobao.org/@soda/get-current-script/download/@soda/get-current-script-1.0.0.tgz#623aa40623550e3b94767cffeb096a6fb597ed09"
   integrity sha1-YjqkBiNVDjuUdnz/6wlqb7WX7Qk=
 
-"@stl/power-plugin@^0.1.27":
-  version "0.1.27"
-  resolved "http://47.113.105.208:8088/@stl%2fpower-plugin/-/power-plugin-0.1.27.tgz#8a886edd8de496de5ae5d7f18129d608bc68e224"
-  integrity sha512-0SOFLEMRQrlM0eqfK8035WHfz7f9qXodmhciCkK2oc9BCpbrBWZWZTTdSHyzp8KGtukjs5sWVDYqai/qIdiqoQ==
+"@stl/power-plugin@^0.1.30":
+  version "0.1.33"
+  resolved "http://47.113.105.208:8088/@stl%2fpower-plugin/-/power-plugin-0.1.33.tgz#3de9945a89132257045d91a737df6d0b80e00a80"
+  integrity sha512-VTAy43q2GfcbvgDr2polcWY9qs6d+VC1X6PsCPKWYWDtKEwYTdw9NRZhU6r/w1MfI/2k/vpnctCDR4aLMH1ngg==
   dependencies:
-    "@stl/request" "^0.0.14"
+    "@stl/request" "^1.0.3"
     "@types/blueimp-md5" "^2.7.0"
     "@types/chai" "^4.2.12"
     "@types/expect.js" "^0.3.29"
-    "@types/lodash" "^4.14.157"
     "@types/mocha" "^8.0.0"
     "@types/nprogress" "^0.2.0"
     "@types/qs" "^6.9.3"
@@ -1364,10 +1399,10 @@
     karma-chai "^0.1.0"
     karma-chrome-launcher "^3.1.0"
     karma-mocha "^2.0.1"
+    karma-sinon "^1.0.5"
     karma-typescript "^5.0.3"
     karma-typescript-es6-transform "^5.0.3"
     less "^3.12.2"
-    lodash "^4.17.15"
     mocha "^8.0.1"
     node-sass "^4.14.1"
     nprogress "^0.2.0"
@@ -1382,35 +1417,39 @@
     rollup-plugin-replace "^2.2.0"
     rollup-plugin-typescript2 "^0.27.1"
     rollup-plugin-uglify "^6.0.4"
+    sinon "^9.0.2"
     stylus "^0.54.8"
     typescript "^3.9.7"
     vue "^2.6.11"
     vue-router "^3.1.6"
 
-"@stl/request@^0.0.14":
-  version "0.0.14"
-  resolved "http://47.113.105.208:8088/@stl%2frequest/-/request-0.0.14.tgz#5535eea3389d9de6510729c986456eb07fbd3205"
-  integrity sha512-jVCyGTDiIvecdnYM24HP0sENVdyHoCnw29oEzEUUl4HjZnhXuCww3wOiJ8/JovVOWrknHFXp6s57oCX6RaHdog==
+"@stl/request@^1.0.1", "@stl/request@^1.0.3":
+  version "1.0.3"
+  resolved "http://47.113.105.208:8088/@stl%2frequest/-/request-1.0.3.tgz#f19d34e10a379ca5b217d502609de2123e843e10"
+  integrity sha512-3ijk/0cKrmxdN6/Pp0mew2RoGcakRWsL6SALMB0hTg8A2BeHH+QZeqFrZ7UHG0GgPB27+ZLqr6HOmOb2+r874Q==
   dependencies:
+    "@babel/polyfill" "^7.10.4"
     "@types/chai" "^4.2.12"
     "@types/expect.js" "^0.3.29"
-    "@types/lodash" "^4.14.158"
     "@types/mocha" "^8.0.0"
     "@types/qs" "^6.9.4"
+    "@types/sinon" "^9.0.4"
     autoprefixer "^9.8.5"
     axios "^0.19.2"
     chai "^4.2.0"
     cssnano "^4.1.10"
     del "^5.1.0"
+    expect.js "^0.3.1"
     gulp "^4.0.2"
     karma "^5.1.1"
     karma-chai "^0.1.0"
     karma-chrome-launcher "^3.1.0"
     karma-mocha "^2.0.1"
+    karma-sinon "^1.0.5"
+    karma-sinon-chai "^2.0.2"
     karma-typescript "^5.0.3"
     karma-typescript-es6-transform "^5.0.3"
     less "^3.12.2"
-    lodash "^4.17.19"
     mocha "^8.0.1"
     node-sass "^4.14.1"
     postcss-nested "^4.2.3"
@@ -1424,6 +1463,8 @@
     rollup-plugin-replace "^2.2.0"
     rollup-plugin-typescript2 "^0.27.1"
     rollup-plugin-uglify "^6.0.4"
+    sinon "^9.0.2"
+    sinon-chai "^3.5.0"
     stylus "^0.54.8"
     typescript "^3.9.7"
 
@@ -1563,11 +1604,6 @@
   resolved "http://47.113.105.208:8088/@types%2flodash/-/lodash-4.14.157.tgz#fdac1c52448861dfde1a2e1515dbc46e54926dc8"
   integrity sha1-/awcUkSIYd/eGi4VFdvEblSSbcg=
 
-"@types/lodash@^4.14.158":
-  version "4.14.158"
-  resolved "http://47.113.105.208:8088/@types%2flodash/-/lodash-4.14.158.tgz#b38ea8b6fe799acd076d7a8d7ab71c26ef77f785"
-  integrity sha1-s46otv55ms0HbXqNerccJu9394U=
-
 "@types/minimatch@*":
   version "3.0.3"
   resolved "https://registry.npm.taobao.org/@types/minimatch/download/@types/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
@@ -1619,6 +1655,18 @@
   integrity sha1-8mB00jjgJlnjI84aE9BB7uKA4ZQ=
   dependencies:
     "@types/node" "*"
+
+"@types/sinon@^9.0.4":
+  version "9.0.4"
+  resolved "http://47.113.105.208:8088/@types%2fsinon/-/sinon-9.0.4.tgz#e934f904606632287a6e7f7ab0ce3f08a0dad4b1"
+  integrity sha1-6TT5BGBmMih6bn96sM4/CKDa1LE=
+  dependencies:
+    "@types/sinonjs__fake-timers" "*"
+
+"@types/sinonjs__fake-timers@*":
+  version "6.0.1"
+  resolved "http://47.113.105.208:8088/@types%2fsinonjs__fake-timers/-/sinonjs__fake-timers-6.0.1.tgz#681df970358c82836b42f989188d133e218c458e"
+  integrity sha1-aB35cDWMgoNrQvmJGI0TPiGMRY4=
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
@@ -5311,7 +5359,7 @@ diff@3.5.0, diff@^3.2.0:
   resolved "https://registry.npm.taobao.org/diff/download/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
   integrity sha1-gAwN0eCov7yVg1wgKtIg/jF+WhI=
 
-diff@4.0.2, diff@^4.0.1:
+diff@4.0.2, diff@^4.0.1, diff@^4.0.2:
   version "4.0.2"
   resolved "https://registry.npm.taobao.org/diff/download/diff-4.0.2.tgz#60f3aecb89d5fae520c11aa19efc2bb982aade7d"
   integrity sha1-YPOuy4nV+uUgwRqhnvwruYKq3n0=
@@ -6181,6 +6229,11 @@ expand-tilde@^2.0.0, expand-tilde@^2.0.2:
   integrity sha1-l+gBqgUt8CRU3kawK/YhZCzchQI=
   dependencies:
     homedir-polyfill "^1.0.1"
+
+expect.js@^0.3.1:
+  version "0.3.1"
+  resolved "http://47.113.105.208:8088/expect.js/-/expect.js-0.3.1.tgz#b0a59a0d2eff5437544ebf0ceaa6015841d09b5b"
+  integrity sha1-sKWaDS7/VDdUTr8M6qYBWEHQm1s=
 
 expect@^23.6.0:
   version "23.6.0"
@@ -8229,6 +8282,11 @@ is-wsl@^2.1.1:
   dependencies:
     is-docker "^2.0.0"
 
+isarray@0.0.1:
+  version "0.0.1"
+  resolved "http://47.113.105.208:8088/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
+  integrity sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=
+
 isarray@1.0.0, isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/isarray/download/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
@@ -9431,6 +9489,11 @@ just-debounce@^1.0.0:
   resolved "http://47.113.105.208:8088/just-debounce/-/just-debounce-1.0.0.tgz#87fccfaeffc0b68cd19d55f6722943f929ea35ea"
   integrity sha1-h/zPrv/AtozRnVX2cilD+SnqNeo=
 
+just-extend@^4.0.2:
+  version "4.1.0"
+  resolved "http://47.113.105.208:8088/just-extend/-/just-extend-4.1.0.tgz#7278a4027d889601640ee0ce0e5a00b992467da4"
+  integrity sha1-cnikAn2IlgFkDuDODloAuZJGfaQ=
+
 karma-chai@^0.1.0:
   version "0.1.0"
   resolved "http://47.113.105.208:8088/karma-chai/-/karma-chai-0.1.0.tgz#bee5ad40400517811ae34bb945f762909108b79a"
@@ -9449,6 +9512,16 @@ karma-mocha@^2.0.1:
   integrity sha1-SwJUoY3+5xvb5hiNmmhhv4awzX0=
   dependencies:
     minimist "^1.2.3"
+
+karma-sinon-chai@^2.0.2:
+  version "2.0.2"
+  resolved "http://47.113.105.208:8088/karma-sinon-chai/-/karma-sinon-chai-2.0.2.tgz#e28c109b989973abafc28a7c9f09ef24a05e07c2"
+  integrity sha1-4owQm5iZc6uvwop8nwnvJKBeB8I=
+
+karma-sinon@^1.0.5:
+  version "1.0.5"
+  resolved "http://47.113.105.208:8088/karma-sinon/-/karma-sinon-1.0.5.tgz#4e3443f2830fdecff624d3747163f1217daa2a9a"
+  integrity sha1-TjRD8oMP3s/2JNN0cWPxIX2qKpo=
 
 karma-typescript-es6-transform@^5.0.3:
   version "5.0.3"
@@ -9816,9 +9889,9 @@ lodash.defaultsdeep@^4.6.1:
   resolved "https://registry.npm.taobao.org/lodash.defaultsdeep/download/lodash.defaultsdeep-4.6.1.tgz#512e9bd721d272d94e3d3a63653fa17516741ca6"
   integrity sha1-US6b1yHSctlOPTpjZT+hdRZ0HKY=
 
-lodash.get@^4.0:
+lodash.get@^4.0, lodash.get@^4.4.2:
   version "4.4.2"
-  resolved "https://registry.npm.taobao.org/lodash.get/download/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  resolved "http://47.113.105.208:8088/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
   integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
 
 lodash.has@^4.0:
@@ -9861,7 +9934,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.npm.taobao.org/lodash.uniq/download/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.0.0, lodash@^4.17.19, lodash@~4.17.10:
+lodash@^4.0.0, lodash@~4.17.10:
   version "4.17.19"
   resolved "http://47.113.105.208:8088/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
   integrity sha1-5I3e2+MLMyF4PFtDAfvTU7weSks=
@@ -10553,6 +10626,17 @@ nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.npm.taobao.org/nice-try/download/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha1-ozeKdpbOfSI+iPybdkvX7xCJ42Y=
+
+nise@^4.0.1:
+  version "4.0.4"
+  resolved "http://47.113.105.208:8088/nise/-/nise-4.0.4.tgz#d73dea3e5731e6561992b8f570be9e363c4512dd"
+  integrity sha1-1z3qPlcx5lYZkrj1cL6eNjxFEt0=
+  dependencies:
+    "@sinonjs/commons" "^1.7.0"
+    "@sinonjs/fake-timers" "^6.0.0"
+    "@sinonjs/text-encoding" "^0.7.1"
+    just-extend "^4.0.2"
+    path-to-regexp "^1.7.0"
 
 no-case@^2.2.0:
   version "2.3.2"
@@ -11420,6 +11504,13 @@ path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
   integrity sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=
+
+path-to-regexp@^1.7.0:
+  version "1.8.0"
+  resolved "http://47.113.105.208:8088/path-to-regexp/-/path-to-regexp-1.8.0.tgz#887b3ba9d84393e87a0a0b9f4cb756198b53548a"
+  integrity sha1-iHs7qdhDk+h6CgufTLdWGYtTVIo=
+  dependencies:
+    isarray "0.0.1"
 
 path-type@^1.0.0:
   version "1.1.0"
@@ -13293,6 +13384,24 @@ single-spa-vue@^1.5.2:
   resolved "https://registry.npm.taobao.org/single-spa-vue/download/single-spa-vue-1.8.2.tgz#16a5eb6e6e0c4cbb35cd2736b81f78ffabc5fcc2"
   integrity sha1-FqXrbm4MTLs1zSc2uB94/6vF/MI=
 
+sinon-chai@^3.5.0:
+  version "3.5.0"
+  resolved "http://47.113.105.208:8088/sinon-chai/-/sinon-chai-3.5.0.tgz#c9a78304b0e15befe57ef68e8a85a00553f5c60e"
+  integrity sha1-yaeDBLDhW+/lfvaOioWgBVP1xg4=
+
+sinon@^9.0.2:
+  version "9.0.2"
+  resolved "http://47.113.105.208:8088/sinon/-/sinon-9.0.2.tgz#b9017e24633f4b1c98dfb6e784a5f0509f5fd85d"
+  integrity sha1-uQF+JGM/SxyY37bnhKXwUJ9f2F0=
+  dependencies:
+    "@sinonjs/commons" "^1.7.2"
+    "@sinonjs/fake-timers" "^6.0.1"
+    "@sinonjs/formatio" "^5.0.1"
+    "@sinonjs/samsam" "^5.0.3"
+    diff "^4.0.2"
+    nise "^4.0.1"
+    supports-color "^7.1.0"
+
 sisteransi@^0.1.1:
   version "0.1.1"
   resolved "https://registry.npmjs.org/sisteransi/-/sisteransi-0.1.1.tgz#5431447d5f7d1675aac667ccd0b865a4994cb3ce"
@@ -14500,7 +14609,7 @@ type-check@~0.3.2:
   dependencies:
     prelude-ls "~1.1.2"
 
-type-detect@^4.0.0, type-detect@^4.0.5:
+type-detect@4.0.8, type-detect@^4.0.0, type-detect@^4.0.5, type-detect@^4.0.8:
   version "4.0.8"
   resolved "https://registry.npm.taobao.org/type-detect/download/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"
   integrity sha1-dkb7XxiHHPu3dJ5pvTmmOI63RQw=
