@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 // const CopyPlugin = require('copy-webpack-plugin')
-const WebpackAssetsManifest = require('webpack-assets-manifest')
-
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
-
+const path = require('path')
+const { externals, cdn } = require('./config/ex.config')
+const plugins = require('./config/plugins.config')
 
 ///是否是开发环境
 const debug = process.env.NODE_ENV !== "production";
-const path = require('path')
-const { externals, cdn } = require('./ex.config')
 const config = {
     configureWebpack: {
         devServer: {
@@ -23,9 +20,7 @@ const config = {
             },
             hot: true
         },
-        plugins: [
-            new WebpackAssetsManifest(), !debug ? new BundleAnalyzerPlugin() : ""
-        ],
+        plugins,
         devtool: debug ? 'cheap-module-eval-source-map' : "",
         externals,
         optimization: {
