@@ -3,8 +3,10 @@
  * @Version: 0.1
  * @Author: EveChee
  * @Date: 2020-05-28 09:52:54
- * @LastEditTime: 2020-05-28 09:56:47
+ * @LastEditTime: 2020-08-03 11:06:18
  */
+import md5 from 'blueimp-md5'
+import { isNumber, cloneDeep } from 'lodash'
 /*
 事件侦听兼容IE
 */
@@ -113,3 +115,96 @@ export const pickerOptions: any = () => ({
     },
   ],
 })
+
+/* 检测是否有键 */
+export function hasKey(target, propName: string) {
+  return Object.prototype.hasOwnProperty.call(target, propName)
+}
+
+/* 1-0 true-false转换数字 */
+export function t1t0(target: 1 | 0 | boolean): 1 | 0 {
+  let temp = +target
+  return (temp ^= 1) as 1 | 0
+}
+
+/* 阻止未完成点击 */
+export function stopUnsuccessful(fn: Function, msgFn: Function) {
+  let successful = false
+  return (...args) => {
+    if (successful) {
+      msgFn()
+      return
+    }
+    successful = true
+    fn(...args).finally(() => (successful = false))
+  }
+}
+
+/*
+判断数据类型
+*/
+
+export const isType = (type: string) => (target: any) =>
+  `[object ${type}]` === Object.prototype.toString.call(target)
+
+const accessKey = '8860286533AB22E05C0BADC7C6CF5DD9'
+const secretKey = 'E11A1F717ADF7445D5C4EDC7A6034355'
+
+export function sign(params: any) {
+  let str = ''
+  if (Array.isArray(params)) {
+    str = `${JSON.stringify(params)}`
+  } else {
+    const sortArr = paramsASCIISort(params)
+    const obj = {}
+    sortArr.forEach(key => {
+      const val = cloneDeep(params[key])
+      if (typeof val === 'object') {
+        str += `${key}${JSON.stringify(val)}`
+      } else {
+        str += `${key}${checkEmpty(val) ? `${val}` : ''}`
+      }
+    })
+  }
+  const timestamp = new Date()
+    .getTime()
+    .toString()
+    .slice(0, -3)
+  const nonce = Math.round(Math.random() * 1000)
+  const res = {
+    sign: md5(`${accessKey}${str || ''}${timestamp}${nonce}${secretKey}`),
+    timestamp,
+    nonce,
+    accessKey
+  }
+  return res
+}
+
+// 参数字典码排序
+export function paramsASCIISort(params: any): string[] {
+  if (!params) return []
+  const arr = Object.keys(params)
+  // arr.sort((a, b) => {
+  //   if (isNumber(+a) && isNumber(+b)) {
+  //     /*
+  //     解决原始排序 1,200,40,5只看首位的问题
+  //     */
+  //     return +a - +b
+  //   } else {
+  //     /*
+  //     当排序非 ASCII 字符的字符串（
+  //     如包含类似 e, é, è, a, ä 等字符的字符串）。
+  //     一些非英语语言的字符串需要使用 String.localeCompare。
+  //     这个函数可以将函数排序到正确的顺序。
+  //     localeCompare() 方法返回一个数字来指示一个参考字符串是否在排序顺序前面或之后或与给定字符串相同。
+  //     */
+  //     return a.localeCompare(b)
+  //   }
+  // })
+  arr.sort()
+  return arr
+}
+
+export function checkEmpty(val) {
+  return val !== '' && val !== undefined && val !== null
+}

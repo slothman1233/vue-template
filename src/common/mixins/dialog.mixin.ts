@@ -59,10 +59,8 @@ export function generatorAEDialog(
     // 保存编辑
     async save() {
       const valid = await this.form.validate()
-      console.log(12333, valid)
       if (!valid) return
       this.saveLoading = true
-      console.log(333, this.mode)
       const res = await (this.mode === 'add' ? addFun : editFun)(this.tempData)
       this.saveLoading = false
       if (!res) return

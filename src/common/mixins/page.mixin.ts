@@ -1,4 +1,4 @@
-import { Component, Vue, Ref } from 'vue-property-decorator'
+import { Component, Vue, Ref, Prop } from 'vue-property-decorator'
 import { EventUtil } from '@/utils'
 import moment from 'moment'
 
@@ -14,13 +14,24 @@ export default class PageSome extends Vue {
   init() {
     this.getList()
   }
-  getList() {
+  getList(form?: any) {
     console.log('请重写getList方法 请求列表')
   }
-  keySearch() {
+  keySearch(form?: any) {
     this.pageIndex = 1
-    this.getList()
+    if (form) {
+      this.keyword = form.keyword
+    }
+    this.getList(form)
   }
+  @Prop({
+    default: false,
+  })
+  iframe?: boolean
+  // 是否内嵌模式
+  @Prop()
+  searchData?: any
+  // 内嵌的筛选条件
   // 条数
   pageSize = 20
 
@@ -77,12 +88,12 @@ export default class PageSome extends Vue {
   nowEditIndex = -1
 
   pageSomeEdit(temp: any, index) {
+    console.log(temp)
     // 编辑
     this.dialogTemp = temp
     this.nowEditIndex = index
     this.dialogMode = 'edit'
     this.showAddDialog = true
-    console.log(this.dialogTemp)
   }
 
   pageSomeTimeFormat(row, column, cellValue) {

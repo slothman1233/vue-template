@@ -3,7 +3,7 @@
  * @Version: 0.1
  * @Author: EveChee
  * @Date: 2020-05-28 09:51:53
- * @LastEditTime: 2020-06-03 15:47:13
+ * @LastEditTime: 2020-07-21 09:38:42
  */
 import { Component, Vue, Watch, PropSync } from 'vue-property-decorator'
 import { EventUtil } from '@/utils'
@@ -109,6 +109,7 @@ export const dialogBackup = (dataName, prop = 'v_show') => {
       this.backupTemp = cloneDeep(this[dataName])
     }
 
+    // 将存储的数据返回
     resetDialogData() {
       this.$emit('dialog-cancel', cloneDeep(this.backupTemp))
       this.backupTemp = null
