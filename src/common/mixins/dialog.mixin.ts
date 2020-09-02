@@ -6,11 +6,11 @@
  * @LastEditTime: 2020-06-05 10:16:50
  */
 import { Component, PropSync, Prop, Ref, Mixins } from 'vue-property-decorator'
-import { dialogOutShow,dialogBackup } from './tool.mixin'
+import { dialogOutShow, dialogBackup } from './tool.mixin'
 import { cloneDeep } from 'lodash'
 const DialogOutShow = dialogOutShow()
 const DialogBackup = dialogBackup('tempData')
- /**
+/**
    * @description: 添加和编辑弹窗公共代码
    * @param {addFun:Function 添加执行的方法}
    * @param {editFun:Function 编辑执行的方法}
@@ -25,29 +25,29 @@ const DialogBackup = dialogBackup('tempData')
    * @author: EveChee
    */
 export function generatorAEDialog(
-  addFun: Function,
-  editFun: Function,
-  options: AEDialogOptions = { temp: {} }
+    addFun: Function,
+    editFun: Function,
+    options: AEDialogOptions = { temp: {} }
 ) {
-  const { temp } = options
+    const { temp } = options
   @Component
-  class AEDialog extends Mixins(DialogOutShow, DialogBackup) {
+    class AEDialog extends Mixins(DialogOutShow, DialogBackup) {
     // 临时数据
     @PropSync('temp', {
-      default: () => cloneDeep(temp),
+        default: () => cloneDeep(temp),
     })
     tempData!: any
 
     // 模式
     @Prop({
-      type: String,
-      default: 'add',
+        type: String,
+        default: 'add',
     })
     mode!: string
 
     // 模式文字
     get title() {
-      return this.mode === 'add' ? '添加' : '编辑'
+        return this.mode === 'add' ? '添加' : '编辑'
     }
 
     // 保存Loading
@@ -58,14 +58,14 @@ export function generatorAEDialog(
     readonly form
     // 保存编辑
     async save() {
-      const valid = await this.form.validate()
-      if (!valid) return
-      this.saveLoading = true
-      const res = await (this.mode === 'add' ? addFun : editFun)(this.tempData)
-      this.saveLoading = false
-      if (!res) return
-      this.$message.success('操作成功')
-      this.closeSelf('update')
+        const valid = await this.form.validate()
+        if (!valid) {return}
+        this.saveLoading = true
+        const res = await (this.mode === 'add' ? addFun : editFun)(this.tempData)
+        this.saveLoading = false
+        if (!res) {return}
+        this.$message.success('操作成功')
+        this.closeSelf('update')
     }
 
   }

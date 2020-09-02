@@ -9,23 +9,23 @@ import http from '@/utils/http'
 
 // 账号列表查询——分页
 export const getUserListForPage = (params?: UserListPageParams) => {
-  return http.get('/api/User/GetPagedList', { params, msgPack:true })
+    return http.get('/api/User/GetPagedList', { params, msgPack: true })
 }
 
 // 账号列表查询
 export const getUserList = (params?: UserListParams) => {
-  return http.get('/api/User/GetList', { params })
+    return http.get('/api/User/GetList', { params })
 }
 // 账号Id查询
 export const getUserById = (params?: BaseByIdParams) => {
-  return http.get('/api/User/GetById', { params })
+    return http.get('/api/User/GetById', { params })
 }
 interface UserListPageParams extends BasePageParams, BaseSearchParams {}
 interface UserListParams extends BaseListParams, BaseSearchParams {}
 
 // 添加账号
 export const addUser = (data: AddUserParams) => {
-  return http.post('/api/User/Add', data, { queryType: 'json' })
+    return http.post('/api/User/Add', data, { queryType: 'json' })
 }
 
 interface AddUserParams {
@@ -59,7 +59,7 @@ interface AddUserParams {
 
 // 编辑账号
 export const editUser = (data: EditUserParams) => {
-  return http.put('/api/User/Update', data, { queryType: 'json' })
+    return http.put('/api/User/Update', data, { queryType: 'json' })
 }
 
 interface EditUserParams extends AddUserParams {
@@ -91,5 +91,5 @@ interface EditUserParams extends AddUserParams {
 
 // 删除账号
 export const deleteUser = (data: BaseDelParams) => {
-  return http.delete('/api/User/Delete', { data })
+    return http.delete('/api/User/Delete', { data })
 }

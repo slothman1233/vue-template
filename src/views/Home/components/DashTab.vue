@@ -21,7 +21,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 @Component({
-  name: 'DashTab',
+    name: 'DashTab',
 })
 export default class DashTab extends Vue {
   @Prop()

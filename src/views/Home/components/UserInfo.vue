@@ -43,8 +43,8 @@
 import { Component, Vue } from 'vue-property-decorator'
 import Chart from './Chart.vue'
 @Component({
-  name: 'UserInfo',
-  components: { Chart },
+    name: 'UserInfo',
+    components: { Chart },
 })
 export default class UserInfo extends Vue {}
 </script>

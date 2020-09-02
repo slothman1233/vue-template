@@ -106,8 +106,8 @@ import { getUserListForPage, getUserById } from '@/common/services/UserService'
 import PageSome from '@/common/mixins/page.mixin'
 import { pickerOptions } from '@/utils'
 @Component({
-  name: 'UserList',
-  components: { ViewInfoDialog },
+    name: 'UserList',
+    components: { ViewInfoDialog },
 })
 export default class UserList extends PageSome {
   pickerOptions = Object.freeze(pickerOptions())
@@ -115,52 +115,52 @@ export default class UserList extends PageSome {
   bannedState: string | number = ''
   // 禁言状态选项
   banedOptions = [
-    { label: '正常用户', value: 0 },
-    { label: '禁言用户', value: 1 },
+      { label: '正常用户', value: 0 },
+      { label: '禁言用户', value: 1 },
   ]
   // 时间区间
   dateInfo = ''
 
   userList: Array<any> = [{}]
   async getList() {
-    // 获取列表
-    const res = await getUserListForPage(this.pageParams)
-    if (!res) return
-    this.userList = res.bodyMessage?.items
-    this.total = res.bodyMessage?.TotalRecords || 0
+      // 获取列表
+      const res = await getUserListForPage(this.pageParams)
+      if (!res) {return}
+      this.userList = res.bodyMessage?.items
+      this.total = res.bodyMessage?.TotalRecords || 0
   }
 
   // 编辑弹窗取消后还原备份数据
   dialogCancel(data) {
-    this.dialogTemp = false
-    this.$set(this.userList, this.nowEditIndex, data)
-    this.nowEditIndex = -1
+      this.dialogTemp = false
+      this.$set(this.userList, this.nowEditIndex, data)
+      this.nowEditIndex = -1
   }
 
   // 此处重写pageSomeEdit 因为需要动态获取其他数据
   async pageSomeEdit(temp: any, index) {
-    const res = await getUserById({ id: temp.id, isMenuActionTree: true })
-    if (!res) return
-    const data = res.bodyMessage
-    data.organizationIds = data.organizations.map(organization => organization.id)
-    data.jobIds = data.jobs.map(job => job.id)
-    data.groupIds = data.groups.map(group => group.id)
-    // 编辑
-    this.dialogTemp = data
-    this.nowEditIndex = index
-    this.dialogMode = 'edit'
-    this.showAddDialog = true
+      const res = await getUserById({ id: temp.id, isMenuActionTree: true })
+      if (!res) {return}
+      const data = res.bodyMessage
+      data.organizationIds = data.organizations.map(organization => organization.id)
+      data.jobIds = data.jobs.map(job => job.id)
+      data.groupIds = data.groups.map(group => group.id)
+      // 编辑
+      this.dialogTemp = data
+      this.nowEditIndex = index
+      this.dialogMode = 'edit'
+      this.showAddDialog = true
   }
 
   showViewInfoDialog = true
   // 查看用户
   showUserInfo(info) {
-    this.showViewInfoDialog = true
-    this.dialogTemp = info
+      this.showViewInfoDialog = true
+      this.dialogTemp = info
   }
   // 展示禁言
   baned(info) {
-    console.log(info)
+      console.log(info)
   }
 }
 </script>

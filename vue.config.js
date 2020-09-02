@@ -5,7 +5,7 @@ const { externals, cdn } = require('./config/ex.config')
 const plugins = require('./config/plugins.config')
 
 ///是否是开发环境
-const debug = process.env.NODE_ENV !== "production";
+const debug = process.env.NODE_ENV !== 'production'
 const config = {
     configureWebpack: {
         devServer: {
@@ -21,7 +21,7 @@ const config = {
             hot: true
         },
         plugins,
-        devtool: debug ? 'cheap-module-eval-source-map' : "",
+        devtool: debug ? 'cheap-module-eval-source-map' : '',
         externals,
         optimization: {
             // splitChunks: {
@@ -52,16 +52,16 @@ const config = {
         },
     },
     chainWebpack: config => {
-        config.plugin("html").tap(args => {
+        config.plugin('html').tap(args => {
             // CDN
             if (debug) {
-                args[0].cdn = cdn.dev;
+                args[0].cdn = cdn.dev
             } else {
-                args[0].cdn = cdn.build;
+                args[0].cdn = cdn.build
             }
 
-            return args;
-        });
+            return args
+        })
         // set svg-sprite-loader
         config.module
             .rule('svg')
@@ -104,5 +104,5 @@ const config = {
         //     }
         // }
     },
-};
+}
 module.exports = config

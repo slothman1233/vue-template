@@ -13,24 +13,23 @@ import '@/common/icons'
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 
-
 const options = {
-  router,
-  store,
-  render: (h: Function) => h(App),
+    router,
+    store,
+    render: h => h(App),
 }
 
 // 独立渲染
 export const render = function() {
-  new Vue(options).$mount('#appName')
+    new Vue(options).$mount('#appName')
 }
 // 微前端模式
 export const vueLifeCycles = ({ el }: any) => {
-  return singleSpaVue({
-    Vue,
-    appOptions: { ...options, el },
-  })
+    return singleSpaVue({
+        Vue,
+        appOptions: { ...options, el },
+    })
 }
 if (!(<any>window).__SINGLE_SPA_MFE__) {
-  render()
+    render()
 }

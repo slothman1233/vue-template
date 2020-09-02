@@ -20,7 +20,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 @Component({
-  name: 'TipButton',
+    name: 'TipButton',
 })
 export default class TipButton extends Vue {
   @Prop()

@@ -10,7 +10,7 @@ import { dialogOutShow } from '@/common/mixins/tool.mixin'
 
 const Dialog = dialogOutShow()
 @Component({
-  name: 'ViewInfoDialog',
+    name: 'ViewInfoDialog',
 })
 export default class ViewInfoDialog extends Dialog {
   @Prop()

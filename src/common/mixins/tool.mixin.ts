@@ -23,24 +23,24 @@ export class NetWorkListener extends Vue {
   private static readonly OFFLINE = 'offline'
 
   mounted() {
-    this.listener()
+      this.listener()
   }
   @Mutation CHANGE_NETWORK
 
   listener() {
-    EventUtil.addHandler(window, NetWorkListener.ONLINE, () =>
-      this[CHANGE_NETWORK](NetWorkListener.ONLINE)
-    )
-    EventUtil.addHandler(window, NetWorkListener.OFFLINE, () =>
-      this[CHANGE_NETWORK](NetWorkListener.OFFLINE)
-    )
+      EventUtil.addHandler(window, NetWorkListener.ONLINE, () =>
+          this[CHANGE_NETWORK](NetWorkListener.ONLINE)
+      )
+      EventUtil.addHandler(window, NetWorkListener.OFFLINE, () =>
+          this[CHANGE_NETWORK](NetWorkListener.OFFLINE)
+      )
   }
 
   get networkMsgOpts() {
-    return {
-      type: this.network === NetWorkListener.ONLINE ? 'success' : 'warning',
-      text: this.network === NetWorkListener.ONLINE ? '网络已连接' : '网络已断开',
-    }
+      return {
+          type: this.network === NetWorkListener.ONLINE ? 'success' : 'warning',
+          text: this.network === NetWorkListener.ONLINE ? '网络已连接' : '网络已断开',
+      }
   }
 
   @State('networkStatus') network
@@ -48,8 +48,8 @@ export class NetWorkListener extends Vue {
   // 网络提示
   @Watch('network')
   networkMsg() {
-    const { type, text } = this.networkMsgOpts
-    this.$message[type](text)
+      const { type, text } = this.networkMsgOpts
+      this.$message[type](text)
   }
 }
 
@@ -61,37 +61,37 @@ export class NetWorkListener extends Vue {
  * @LastEditTime: Do not edit
  */
 export const dialogOutShow = (prop = 'show') => {
-  const propName: unique symbol = Symbol(prop)
+    const propName: unique symbol = Symbol(prop)
   @Component
-  class DialogOutShow extends Vue {
+    class DialogOutShow extends Vue {
     @PropSync(prop, {
-      type: Boolean,
-      default: false,
+        type: Boolean,
+        default: false,
     })
     [propName]?: boolean
 
     get [`v_${prop}`]() {
-      return this[prop]
+        return this[prop]
     }
     set [`v_${prop}`](val) {
-      this.$emit(`update:${prop}`, val)
+        this.$emit(`update:${prop}`, val)
     }
 
     beforeClose(done) {
-      this.resetDialogData()
-      done()
+        this.resetDialogData()
+        done()
     }
     closeSelf(flag: any) {
-      this[`v_${prop}`] = false
-      if (flag === 'update') {
-        this.$emit('update')
-      } else {
-        this.resetDialogData()
-      }
+        this[`v_${prop}`] = false
+        if (flag === 'update') {
+            this.$emit('update')
+        } else {
+            this.resetDialogData()
+        }
     }
 
     resetDialogData() {
-      console.log('可重写resetDialogData方法')
+        console.log('可重写resetDialogData方法')
     }
   }
   return DialogOutShow
@@ -100,19 +100,19 @@ export const dialogOutShow = (prop = 'show') => {
 // 需要数据备份的弹窗
 export const dialogBackup = (dataName, prop = 'v_show') => {
   @Component
-  class DialogBackup extends Vue {
+    class DialogBackup extends Vue {
     // 备份数据
     backupTemp = null
     @Watch(prop)
     backupDialogData(val) {
-      if (!val) return
-      this.backupTemp = cloneDeep(this[dataName])
+        if (!val) {return}
+        this.backupTemp = cloneDeep(this[dataName])
     }
 
     // 将存储的数据返回
     resetDialogData() {
-      this.$emit('dialog-cancel', cloneDeep(this.backupTemp))
-      this.backupTemp = null
+        this.$emit('dialog-cancel', cloneDeep(this.backupTemp))
+        this.backupTemp = null
     }
   }
   return DialogBackup

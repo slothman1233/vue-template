@@ -18,8 +18,8 @@ import { Component } from 'vue-property-decorator'
 import SelfInfo from './SelfInfo.vue'
 import Tabs from '@/components/Tabs/index.vue'
 @Component({
-  name: 'HeaderNav',
-  components: { SelfInfo, Tabs },
+    name: 'HeaderNav',
+    components: { SelfInfo, Tabs },
 })
 export default class HeaderNav extends Vue {}
 </script>

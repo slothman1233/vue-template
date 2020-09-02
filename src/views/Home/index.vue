@@ -75,8 +75,8 @@ import DashTab from './components/DashTab.vue'
 import Chart from './components/Chart.vue'
 import { power } from '@/router'
 @Component({
-  name: 'Home',
-  components: { DashTab, Chart },
+    name: 'Home',
+    components: { DashTab, Chart },
 })
 export default class Home extends Vue {
   @power.HasBtn('user:copy')

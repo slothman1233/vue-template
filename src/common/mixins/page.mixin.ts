@@ -8,24 +8,24 @@ import moment from 'moment'
 */
 @Component
 export default class PageSome extends Vue {
-  created() {
-    this.init()
-  }
-  init() {
-    this.getList()
-  }
-  getList(form?: any) {
-    console.log('请重写getList方法 请求列表')
-  }
-  keySearch(form?: any) {
-    this.pageIndex = 1
-    if (form) {
-      this.keyword = form.keyword
+    created() {
+        this.init()
     }
-    this.getList(form)
-  }
+    init() {
+        this.getList()
+    }
+    getList(form?: any) {
+        console.log('请重写getList方法 请求列表')
+    }
+    keySearch(form?: any) {
+        this.pageIndex = 1
+        if (form) {
+            this.keyword = form.keyword
+        }
+        this.getList(form)
+    }
   @Prop({
-    default: false,
+      default: false,
   })
   iframe?: boolean
   // 是否内嵌模式
@@ -42,11 +42,11 @@ export default class PageSome extends Vue {
   keyword = ''
 
   get pageParams() {
-    return {
-      pageIndex: this.pageIndex,
-      pageSize: this.pageSize,
-      searchKey: this.keyword,
-    }
+      return {
+          pageIndex: this.pageIndex,
+          pageSize: this.pageSize,
+          searchKey: this.keyword,
+      }
   }
 
   // 总条数
@@ -60,14 +60,14 @@ export default class PageSome extends Vue {
   _tbel: any = null
   _document: any = null
   pageSomeChangeTableHeight() {
-    this._tbel = this._tbel || this.table.$el
-    this._document = this._document || document.body
-    // 顶部距离
-    const offsetTop = this._tbel?.offsetTop
-    // 可视区域高度
-    const height = this._document?.scrollHeight
-    //可供使用的区域高度
-    this.maxTableHeight = height - offsetTop - 80
+      this._tbel = this._tbel || this.table.$el
+      this._document = this._document || document.body
+      // 顶部距离
+      const offsetTop = this._tbel?.offsetTop
+      // 可视区域高度
+      const height = this._document?.scrollHeight
+      //可供使用的区域高度
+      this.maxTableHeight = height - offsetTop - 80
   }
 
   // 弹窗显示
@@ -78,34 +78,34 @@ export default class PageSome extends Vue {
   dialogMode = 'add'
 
   pageSomeAdd() {
-    // 新增
-    this.dialogTemp = undefined
-    this.dialogMode = 'add'
-    this.showAddDialog = true
+      // 新增
+      this.dialogTemp = undefined
+      this.dialogMode = 'add'
+      this.showAddDialog = true
   }
 
   // 当前正在编辑 -1没有
   nowEditIndex = -1
 
   pageSomeEdit(temp: any, index) {
-    console.log(temp)
-    // 编辑
-    this.dialogTemp = temp
-    this.nowEditIndex = index
-    this.dialogMode = 'edit'
-    this.showAddDialog = true
+      console.log(temp)
+      // 编辑
+      this.dialogTemp = temp
+      this.nowEditIndex = index
+      this.dialogMode = 'edit'
+      this.showAddDialog = true
   }
 
   pageSomeTimeFormat(row, column, cellValue) {
-    return moment(cellValue).format('YYYY-MM-DD HH:mm')
+      return moment(cellValue).format('YYYY-MM-DD HH:mm')
   }
 
   mounted() {
-    this.pageSomeChangeTableHeight()
-    EventUtil.addHandler(window, 'resize', this.pageSomeChangeTableHeight)
+      this.pageSomeChangeTableHeight()
+      EventUtil.addHandler(window, 'resize', this.pageSomeChangeTableHeight)
   }
 
   destroyed() {
-    EventUtil.removeHandler(window, 'resize', this.pageSomeChangeTableHeight)
+      EventUtil.removeHandler(window, 'resize', this.pageSomeChangeTableHeight)
   }
 }

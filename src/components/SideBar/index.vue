@@ -32,8 +32,8 @@ import Logo from './Logo.vue'
 import { routes } from '@/router'
 
 @Component({
-  name: 'SideBar',
-  components: { SideBarItem, Logo },
+    name: 'SideBar',
+    components: { SideBarItem, Logo },
 })
 export default class SideBar extends Vue {
   @Prop()
@@ -41,53 +41,53 @@ export default class SideBar extends Vue {
   showLogo = false
 
   variables = {
-    menuBg: '#304156',
-    menuText: '#bfcbd9',
-    menuActiveText: '#409EFF',
+      menuBg: '#304156',
+      menuText: '#bfcbd9',
+      menuActiveText: '#409EFF',
   }
 
   parseRouteForBar(r, basePath = '/') {
-    const nav: Array<NavData> = []
-    r.forEach(({ meta, path, children }) => {
-      const mpath = this.pathResolve(basePath, path)
-      if (meta?.inTheBar || (children && children.length)) {
-        let obj: NavData = {
-          subName: meta?.title,
-          path: mpath,
-          icon: meta?.icon,
-        }
-        if (children?.length > 1) {
-          obj.children = children.map(child => ({
-            subName: child.meta?.title,
-            path: this.pathResolve(obj.path, child.path),
-            icon: child.meta?.icon,
-          }))
-        } else if (children?.length) {
-          const child = children[0]
-          obj = {
-            subName: child.meta?.title,
-            path: this.pathResolve(obj.path, child.path),
-            icon: child.meta?.icon,
+      const nav: Array<NavData> = []
+      r.forEach(({ meta, path, children }) => {
+          const mpath = this.pathResolve(basePath, path)
+          if (meta?.inTheBar || (children && children.length)) {
+              let obj: NavData = {
+                  subName: meta?.title,
+                  path: mpath,
+                  icon: meta?.icon,
+              }
+              if (children?.length > 1) {
+                  obj.children = children.map(child => ({
+                      subName: child.meta?.title,
+                      path: this.pathResolve(obj.path, child.path),
+                      icon: child.meta?.icon,
+                  }))
+              } else if (children?.length) {
+                  const child = children[0]
+                  obj = {
+                      subName: child.meta?.title,
+                      path: this.pathResolve(obj.path, child.path),
+                      icon: child.meta?.icon,
+                  }
+              }
+              nav.push(obj)
           }
-        }
-        nav.push(obj)
-      }
-    })
-    return nav.filter(({ subName }) => !!subName)
+      })
+      return nav.filter(({ subName }) => !!subName)
   }
 
   pathResolve(basePath, path) {
-    if (basePath === '/') {
-      return path.indexOf('/') !== 0 ? basePath + path : path
-    }
-    return basePath + '/' + path
+      if (basePath === '/') {
+          return path.indexOf('/') !== 0 ? basePath + path : path
+      }
+      return basePath + '/' + path
   }
 
   navData: Array<NavData> = this.parseRouteForBar(routes)
 
   get activeMenu() {
-    // if set path, the sidebar will highlight the path you set
-    return this.$route.fullPath
+      // if set path, the sidebar will highlight the path you set
+      return this.$route.fullPath
   }
 }
 

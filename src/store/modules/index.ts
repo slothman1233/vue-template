@@ -9,7 +9,7 @@ const files = require.context('.', false, /\.(js|ts)$/)
 const modules: any = {}
 
 files.keys().forEach(key => {
-  if (key === './index.ts' || key === './index.js') return
-  modules[key.replace(/(\.\/|\.(js|ts))/g, '')] = files(key).default
+    if (key === './index.ts' || key === './index.js') {return}
+    modules[key.replace(/(\.\/|\.(js|ts))/g, '')] = files(key).default
 })
 export default modules

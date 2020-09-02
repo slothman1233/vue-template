@@ -26,16 +26,16 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import {power} from '@/router'
 @Component({
-  name: 'SelfInfo',
+    name: 'SelfInfo',
 })
 export default class SelfInfo extends Vue {
-  handleCommand(command) {
-    this[command]()
-  }
+    handleCommand(command) {
+        this[command]()
+    }
 
-  logout() {
-    power.logout()
-  }
+    logout() {
+        power.logout()
+    }
 }
 </script>
 

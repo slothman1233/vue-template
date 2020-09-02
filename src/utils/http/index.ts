@@ -5,8 +5,8 @@ import { power } from '@/router'
 import { sign } from '@/utils'
 
 export default new HttpService('', {
-  msgUI: Message,
-  logout: power.logout,
-  getToken: () => power.token,
-  signHeaders: sign
+    msgUI: Message,
+    logout: power.logout,
+    getToken: () => power.token,
+    signHeaders: sign
 })

@@ -10,20 +10,20 @@ export interface DemoState {
   test: number
 }
 const state: DemoState = {
-  test: 123,
+    test: 123,
 }
 
 const mutations: MutationTree<DemoState> = {
-  ADD_TO(state, project) {
-    state.test++
-  },
+    ADD_TO(state, project) {
+        state.test++
+    },
 }
 
 const actions: ActionTree<DemoState, RootState> = {}
 const Demo: Module<DemoState, RootState> = {
-  state,
-  mutations,
-  actions,
-  namespaced: true,
+    state,
+    mutations,
+    actions,
+    namespaced: true,
 }
 export default Demo

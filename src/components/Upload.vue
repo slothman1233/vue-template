@@ -29,54 +29,54 @@ import { name as preview } from '@/common/plugins/PreviewImg'
 import { cloneDeep } from 'lodash'
 import { sign } from '../utils'
 @Component({
-  name: 'Upload',
+    name: 'Upload',
 })
 export default class Upload extends Vue {
   fileData: any = {
-    // 进度信息 100 为 100%
-    progress: 0,
+      // 进度信息 100 为 100%
+      progress: 0,
   }
 
   @Model('change', {
-    type: Array,
+      type: Array,
   })
   value!: Array<any>
 
   @Emit('change')
   change(e: any) {
-    return e
+      return e
   }
 
   get fileList() {
-    return cloneDeep(this.value)
+      return cloneDeep(this.value)
   }
   set fileList(val) {
-    this.change(val)
+      this.change(val)
   }
   get hideUpload() {
-    return this.fileList.length >= 1
+      return this.fileList.length >= 1
   }
 
   handlePictureCardPreview(file) {
-    this[preview]({
-      img: this.fileList,
-    })
+      this[preview]({
+          img: this.fileList,
+      })
   }
   handleRemove(file, fileList) {
-    this.fileList = fileList
+      this.fileList = fileList
   }
   handleError(err, file, fileList) {
-    console.log(err)
-    this.$message.error('上传失败')
+      console.log(err)
+      this.$message.error('上传失败')
   }
   onSuccess(res, file, fileList) {
-    res && this.change(res.code == 0 ? [{ url: res.bodyMessage }] : fileList)
+      res && this.change(res.code === 0 ? [{ url: res.bodyMessage }] : fileList)
   }
   onProgress(event, file, fileList) {
-    this.fileData.progress = +event.percent.toFixed(2)
+      this.fileData.progress = +event.percent.toFixed(2)
   }
   get signHeaders() {
-    return sign(this.$attrs.data)
+      return sign(this.$attrs.data)
   }
 }
 </script>

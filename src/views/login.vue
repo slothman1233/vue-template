@@ -58,49 +58,49 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import { power } from '@/router'
 import http from '../utils/http'
 @Component({
-  components: {},
+    components: {},
 })
 export default class Login extends Vue {
   loginForm = {
-    username: 'admin0',
-    pwd: '123456',
+      username: 'admin0',
+      pwd: '123456',
   }
 
   rules = {
-    username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-    pwd: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-    code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
+      username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+      pwd: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+      code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
   }
 
   loginLoading = false
 
   async submitForm() {
-    const valid = await (this.$refs['login'] as any).validate().catch(e => console.log(e))
-    if (!valid || this.loginLoading) return
-    this.loginLoading = true
-    const res = await power.login(this.loginForm)
-    this.loginLoading = false
-    if (!res) return
-    this.$router.replace('/').catch(e => console.log(e))
+      const valid = await (this.$refs['login'] as any).validate().catch(e => console.log(e))
+      if (!valid || this.loginLoading) {return}
+      this.loginLoading = true
+      const res = await power.login(this.loginForm)
+      this.loginLoading = false
+      if (!res) {return}
+      this.$router.replace('/').catch(e => console.log(e))
   }
   passwordType = 'password'
   showPwd() {
-    if (this.passwordType === 'password') {
-      this.passwordType = ''
-    } else {
-      this.passwordType = 'password'
-    }
-    this.$nextTick(() => {
-      (this.$refs.password as HTMLElement).focus()
-    })
+      if (this.passwordType === 'password') {
+          this.passwordType = ''
+      } else {
+          this.passwordType = 'password'
+      }
+      this.$nextTick(() => {
+          (this.$refs.password as HTMLElement).focus()
+      })
   }
 
   redirect = undefined
   @Watch('$route', {
-    immediate: true,
+      immediate: true,
   })
   function(route) {
-    this.redirect = route.query && route.query.redirect
+      this.redirect = route.query && route.query.redirect
   }
 }
 </script>

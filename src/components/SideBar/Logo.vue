@@ -16,7 +16,7 @@
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 @Component({
-  name: 'Logo',
+    name: 'Logo',
 })
 export default class Logo extends Vue {}
 </script>

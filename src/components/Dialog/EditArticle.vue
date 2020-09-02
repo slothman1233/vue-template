@@ -70,79 +70,79 @@ import { Component } from 'vue-property-decorator'
 import { generatorAEDialog } from '@/common/mixins/dialog.mixin'
 import Tinymce from '@/components/Tinymce/index.vue'
 const addFun = () => {
-  console.log(1)
+    console.log(1)
 }
 const editFun = () => {
-  console.log(2)
+    console.log(2)
 }
 const AEDialog = generatorAEDialog(
-  addFun,
-  // 这里是编辑的方法
-  function() {}
+    addFun,
+    // 这里是编辑的方法
+    function() {}
 )
 @Component({
-  name: 'EditArticle',
-  components: { Tinymce },
+    name: 'EditArticle',
+    components: { Tinymce },
 })
 export default class EditArticle extends AEDialog {
-  beforeClose() {
-    console.log(3)
-  }
-  // 是否封面
-  get isPost() {
-    return this.tempData.bannerSort > 0
-  }
-  set isPost(val) {
-    this.tempData.bannerSort = val ? 1 : 0
-  }
+    beforeClose() {
+        console.log(3)
+    }
+    // 是否封面
+    get isPost() {
+        return this.tempData.bannerSort > 0
+    }
+    set isPost(val) {
+        this.tempData.bannerSort = val ? 1 : 0
+    }
 
-  // 虚拟阅读数
-  get virtualRead() {
-    return this.tempData.readShow - this.tempData.readCount
-  }
-  set virtualRead(val) {
-    this.tempData.readShow = this.tempData.readCount + val
-  }
+    // 虚拟阅读数
+    get virtualRead() {
+        return this.tempData.readShow - this.tempData.readCount
+    }
+    set virtualRead(val) {
+        this.tempData.readShow = this.tempData.readCount + val
+    }
 
-  get rules() {
-    const titleMaxLenght = this.isPost ? 20 : 50
-    const checkSortNum = (rule, value, callback) => {
-      if (value === '') return callback(new Error('封面专题序号不能为空'))
-      if (!Number.isInteger(value)) {
-        callback(new Error('请输入数字值'))
-      } else {
-        if (this.isPost && value <= 0) {
-          callback(new Error('必须大于1'))
-        } else {
-          callback()
+    get rules() {
+        const titleMaxLenght = this.isPost ? 20 : 50
+        const checkSortNum = (rule, value, callback) => {
+            if (value === '') {return callback(new Error('封面专题序号不能为空'))}
+            if (!Number.isInteger(value)) {
+                callback(new Error('请输入数字值'))
+            } else {
+                if (this.isPost && value <= 0) {
+                    callback(new Error('必须大于1'))
+                } else {
+                    callback()
+                }
+            }
         }
-      }
+        const rule = {
+            chapterTitle: [
+                { required: true, message: '请输入标题', trigger: 'blur' },
+                { min: 1, max: titleMaxLenght, message: `长度在1-${titleMaxLenght}个字`, trigger: 'blur' },
+            ],
+            subTitle: [
+                { required: this.isPost, message: '封面专题必须有副标题', trigger: 'blur' },
+                { min: 1, max: titleMaxLenght, message: `长度在1-${titleMaxLenght}个字`, trigger: 'blur' },
+            ],
+            bannerSort: [
+                {
+                    required: this.isPost,
+                    validator: checkSortNum,
+                    message: '封面专题必须有序号',
+                    trigger: 'blur',
+                },
+            ],
+            audioSrc: [{ required: true, message: '请上传音频', trigger: 'change' }],
+            chapterSummary: [
+                { required: this.isPost, message: '封面专题必须填写摘要', trigger: 'change' },
+                { min: 0, max: 120, message: `长度在0-120个字`, trigger: 'change' },
+            ],
+        }
+        return rule
     }
-    const rule = {
-      chapterTitle: [
-        { required: true, message: '请输入标题', trigger: 'blur' },
-        { min: 1, max: titleMaxLenght, message: `长度在1-${titleMaxLenght}个字`, trigger: 'blur' },
-      ],
-      subTitle: [
-        { required: this.isPost, message: '封面专题必须有副标题', trigger: 'blur' },
-        { min: 1, max: titleMaxLenght, message: `长度在1-${titleMaxLenght}个字`, trigger: 'blur' },
-      ],
-      bannerSort: [
-        {
-          required: this.isPost,
-          validator: checkSortNum,
-          message: '封面专题必须有序号',
-          trigger: 'blur',
-        },
-      ],
-      audioSrc: [{ required: true, message: '请上传音频', trigger: 'change' }],
-      chapterSummary: [
-        { required: this.isPost, message: '封面专题必须填写摘要', trigger: 'change' },
-        { min: 0, max: 120, message: `长度在0-120个字`, trigger: 'change' },
-      ],
-    }
-    return rule
-  }
 }
 </script>
 

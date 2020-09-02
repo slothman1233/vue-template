@@ -34,46 +34,46 @@ export default class Tabs extends Vue {
   // 监听路由
   @Watch('$route')
   checkRoute(nval) {
-    this.setTabs(nval)
+      this.setTabs(nval)
   }
 
   // 第一次生成
   created() {
-    this.setTabs(this.$route)
+      this.setTabs(this.$route)
   }
 
   setTabs(route) {
-    const matched = this.tabs.find(({ path }) => path === route.fullPath)
-    if (!matched) {
-      const obj = {
-        title: route.meta.title,
-        path: route.fullPath,
-        name: route.name || route.meta.title,
+      const matched = this.tabs.find(({ path }) => path === route.fullPath)
+      if (!matched) {
+          const obj = {
+              title: route.meta.title,
+              path: route.fullPath,
+              name: route.name || route.meta.title,
+          }
+          this.tabs.push(obj)
+          this.activeName = obj.name
+      } else {
+          this.activeName = matched.name
       }
-      this.tabs.push(obj)
-      this.activeName = obj.name
-    } else {
-      this.activeName = matched.name
-    }
   }
 
   handleClick(tab) {
-    const { fullPath } = this.$route
-    const path = tab.$attrs.route
-    if (fullPath === path) return
-    this.$router.push(path)
+      const { fullPath } = this.$route
+      const path = tab.$attrs.route
+      if (fullPath === path) {return}
+      this.$router.push(path)
   }
 
   handleRemove(name) {
-    // 如果关闭的是当前页
-    const index = this.tabs.findIndex(tab => tab.name === name)
-    if (name === this.activeName) {
-      const nextTab = this.tabs[index + 1] || this.tabs[index - 1]
-      if (nextTab) {
-        this.$router.push(nextTab.path).catch(e => console.log(e))
+      // 如果关闭的是当前页
+      const index = this.tabs.findIndex(tab => tab.name === name)
+      if (name === this.activeName) {
+          const nextTab = this.tabs[index + 1] || this.tabs[index - 1]
+          if (nextTab) {
+              this.$router.push(nextTab.path).catch(e => console.log(e))
+          }
       }
-    }
-    this.tabs.splice(index, 1)
+      this.tabs.splice(index, 1)
   }
 }
 </script>

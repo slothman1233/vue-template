@@ -55,7 +55,7 @@
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator'
 @Component({
-  name: 'SideBarItem',
+    name: 'SideBarItem',
 })
 export default class SideBarItem extends Vue {
   @Prop()

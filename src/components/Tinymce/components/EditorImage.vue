@@ -22,52 +22,52 @@
 <script lang="ts">
 // import { UploadImg } from '@/common/services/ArticleService'
 function UploadImg(opts: any) {
-  // 上传图片的方法
-  return opts
+    // 上传图片的方法
+    return opts
 }
 export default {
-  name: 'EditorSlideUpload',
-  props: {
-    color: {
-      type: String,
-      default: '#1890ff',
+    name: 'EditorSlideUpload',
+    props: {
+        color: {
+            type: String,
+            default: '#1890ff',
+        },
     },
-  },
-  data() {
-    return {
-      listObj: {},
-      fileList: [],
-    }
-  },
-  methods: {
-    beforeAvatarUpload(file) {
-      const fileName = file.uid
-      let imgUrlBase64
-      let reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onload = async e => {
-        imgUrlBase64 = e.target?.result //转换后的文件数据存储在e.target.result中
-        let params = {
-          base64: imgUrlBase64,
-          Extension: 'png',
-          GetInfo: true,
+    data() {
+        return {
+            listObj: {},
+            fileList: [],
         }
-        const res = await UploadImg(params)
-        if (!res) return
-        let data = res.bodyMessage
-        let arr = [
-          {
-            hasSuccess: false,
-            uid: file.uid,
-            width: data.width,
-            height: data.height,
-            url: data.url,
-          },
-        ]
-        ;(this as any).$emit('successCBK', arr)
-      }
     },
-  },
+    methods: {
+        beforeAvatarUpload(file) {
+            const fileName = file.uid
+            let imgUrlBase64
+            const reader = new FileReader()
+            reader.readAsDataURL(file)
+            reader.onload = async e => {
+                imgUrlBase64 = e.target?.result //转换后的文件数据存储在e.target.result中
+                const params = {
+                    base64: imgUrlBase64,
+                    Extension: 'png',
+                    GetInfo: true,
+                }
+                const res = await UploadImg(params)
+                if (!res) {return}
+                const data = res.bodyMessage
+                const arr = [
+                    {
+                        hasSuccess: false,
+                        uid: file.uid,
+                        width: data.width,
+                        height: data.height,
+                        url: data.url,
+                    },
+                ]
+        ;(this as any).$emit('successCBK', arr)
+            }
+        },
+    },
 }
 </script>
 

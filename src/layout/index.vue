@@ -25,13 +25,13 @@ import HeaderNav from '@/components/HeaderNav/index.vue'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 
 @Component({
-  name: 'HomeIndexLayOut',
-  components: { SideBar, HeaderNav, Breadcrumb },
+    name: 'HomeIndexLayOut',
+    components: { SideBar, HeaderNav, Breadcrumb },
 })
 export default class HomeIndexLayOut extends Vue {
   isCollapse = false
   toggleSideBar(){
-    this.isCollapse = !this.isCollapse
+      this.isCollapse = !this.isCollapse
   }
 }
 </script>

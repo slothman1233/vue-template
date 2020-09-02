@@ -7,7 +7,7 @@ export default class Sselect extends Vue {
 
   @Emit('change')
   change(e: any) {
-    return e
+      return e
   }
   @Prop()
   options!:[]
@@ -15,12 +15,12 @@ export default class Sselect extends Vue {
   placeholder!:[]
   // 状态选项
   render() {
-    return (
-      <el-select class="search-item" value={this.state} onChange={this.change} placeholder={this.placeholder}>
-        {this.options.map((item:any) => (
-          <el-option key={item.value} label={item.label} value={item.value}></el-option>
-        ))}
-      </el-select>
-    )
+      return (
+          <el-select class="search-item" value={this.state} onChange={this.change} placeholder={this.placeholder}>
+              {this.options.map((item:any) => (
+                  <el-option key={item.value} label={item.label} value={item.value}></el-option>
+              ))}
+          </el-select>
+      )
   }
 }

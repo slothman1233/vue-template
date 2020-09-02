@@ -32,42 +32,42 @@ export default class PluginBase {
   id = 0
   name: string
   constructor(params: PluginParams) {
-    this.content = params.content
-    this.struct = params.struct
-    this.name = params.name
+      this.content = params.content
+      this.struct = params.struct
+      this.name = params.name
   }
   Component = (options: any) => {
-    if (typeof options === 'string' && this.content) {
+      if (typeof options === 'string' && this.content) {
       //如何只传入字符串，将其设置为默认字段的值
-      options = {
-        [this.content]: options,
+          options = {
+              [this.content]: options,
+          }
       }
-    }
-    let finalOptions = {}
-    if (options?.__advanced__) {
+      let finalOptions = {}
+      if (options?.__advanced__) {
       // 直接使用传入的对象 _advanced标识
-      delete options.__advanced__
-      finalOptions = options
-    } else {
+          delete options.__advanced__
+          finalOptions = options
+      } else {
       // 使用部分数据的对象 _advanced 不传或false
-      finalOptions = {
-        data: () => cloneDeep(options),
+          finalOptions = {
+              data: () => cloneDeep(options),
+          }
       }
-    }
-    if (limitNameList.includes(this.name) && document.querySelector(`.plugin__${this.name}`)) {
+      if (limitNameList.includes(this.name) && document.querySelector(`.plugin__${this.name}`)) {
       // 限制重复提示
-      console.log('不可重复打开')
-      return
-    }
-    // 下面实例化并挂载
-    const Instance = new this.struct(finalOptions)
-    this.id++
-    Instance.id = `${this.name}${this.id}`
-    if(this.id > 999) this.id = 0;
-    Instance.vm = Instance.$mount() // 挂载但是并未插入dom，是一个完整的Vue实例
-    Instance.vm.visible = true
-    Instance.dom = Instance.vm.$el //获取到本实例的dom元素
-    document.body.appendChild(Instance.dom) // 将dom插入body
-    return Instance.vm
+          console.log('不可重复打开')
+          return
+      }
+      // 下面实例化并挂载
+      const Instance = new this.struct(finalOptions)
+      this.id++
+      Instance.id = `${this.name}${this.id}`
+      if(this.id > 999) {this.id = 0}
+      Instance.vm = Instance.$mount() // 挂载但是并未插入dom，是一个完整的Vue实例
+      Instance.vm.visible = true
+      Instance.dom = Instance.vm.$el //获取到本实例的dom元素
+      document.body.appendChild(Instance.dom) // 将dom插入body
+      return Instance.vm
   }
 }
