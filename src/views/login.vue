@@ -5,7 +5,7 @@
       :rules="rules"
       ref="login"
       class="login-form"
-          size="large"
+      size="large"
       @keyup.enter.native="submitForm"
     >
       <div class="title-container">
@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Component, Ref, Vue, Watch } from 'vue-property-decorator'
 import { power } from '@/router'
 import http from '../utils/http'
 @Component({
@@ -73,26 +73,28 @@ export default class Login extends Vue {
   }
 
   loginLoading = false
+  @Ref('login')
+  readonly loginRef
 
   async submitForm() {
-      const valid = await (this.$refs['login'] as any).validate().catch(e => console.log(e))
-      if (!valid || this.loginLoading) {return}
+      const valid = await this.loginRef.validate().catch(e => console.log(e))
+      if (!valid || this.loginLoading) {
+          return
+      }
       this.loginLoading = true
       const res = await power.login(this.loginForm)
       this.loginLoading = false
-      if (!res) {return}
+      if (!res) {
+          return
+      }
       this.$router.replace('/').catch(e => console.log(e))
   }
   passwordType = 'password'
+  @Ref('password')
+  readonly passwordRef
   showPwd() {
-      if (this.passwordType === 'password') {
-          this.passwordType = ''
-      } else {
-          this.passwordType = 'password'
-      }
-      this.$nextTick(() => {
-          (this.$refs.password as HTMLElement).focus()
-      })
+      this.passwordType = this.passwordType === 'password' ? '' : 'password'
+      this.$nextTick(() => this.passwordRef.focus())
   }
 
   redirect = undefined

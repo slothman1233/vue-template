@@ -1,14 +1,15 @@
 <template>
-  <div
-    :class="{ fullscreen: fullscreen }"
-    class="tinymce-container"
-    :style="{ width: containerWidth }"
-  >
-    <textarea :id="tinymceId" class="tinymce-textarea" />
-    <div class="editor-custom-btn-container">
-      <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK" />
+    <div
+        :class="{ fullscreen: fullscreen }"
+        class="tinymce-container"
+        id="tinymceHack"
+        :style="{ width: containerWidth }"
+    >
+        <textarea :id="tinymceId" class="tinymce-textarea" />
+        <div class="editor-custom-btn-container">
+            <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK" />
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -137,6 +138,7 @@ export default {
                 imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
                 default_link_target: '_blank',
                 link_title: false,
+                branding: false,
                 nonbreaking_force_tab: true, // inserting nonbreaking space &nbsp; need Nonbreaking Space Plugin
                 init_instance_callback: editor => {
                     if (_this.value) {
@@ -207,36 +209,38 @@ export default {
         imageSuccessCBK(arr) {
             const _this = this
             arr.forEach(v => {
-                window.tinymce.get(_this.tinymceId).insertContent(`<img class="wscnph" src="${v.url}" >`)
+                window.tinymce
+                    .get(_this.tinymceId)
+                    .insertContent(`<img class="wscnph" src="${v.url}" >`)
             })
         },
     },
 }
 </script>
 
-<style scoped>
-.tinymce-container {
-  position: relative;
-  line-height: normal;
-}
-.tinymce-container >>> .mce-fullscreen {
-  z-index: 10000;
-}
-.tinymce-textarea {
-  visibility: hidden;
-  z-index: -1;
-}
-.editor-custom-btn-container {
-  position: absolute;
-  right: 4px;
-  top: 4px;
-  /*z-index: 2005;*/
-}
-.fullscreen .editor-custom-btn-container {
-  z-index: 10000;
-  position: fixed;
-}
-.editor-upload-btn {
-  display: inline-block;
+<style scoped lang="less">
+#tinymceHack {
+    position: relative;
+    line-height: normal;
+    /deep/ .mce-fullscreen {
+        z-index: 10000;
+    }
+    .tinymce-textarea {
+        visibility: hidden;
+        z-index: -1;
+    }
+    .editor-custom-btn-container {
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        /*z-index: 2005;*/
+    }
+    .fullscreen .editor-custom-btn-container {
+        z-index: 10000;
+        position: fixed;
+    }
+    .editor-upload-btn {
+        display: inline-block;
+    }
 }
 </style>

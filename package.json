@@ -14,7 +14,7 @@
     "@babel/plugin-proposal-function-bind": "^7.8.3",
     "@babel/polyfill": "^7.10.4",
     "@stl/power-plugin": "^0.1.33",
-    "@stl/request": "^1.0.4",
+    "@stl/request": "^1.1.1",
     "@tinymce/tinymce-vue": "^3.2.2",
     "@types/blueimp-md5": "^2.7.0",
     "@types/lodash": "^4.14.157",
