@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+// const CopyPlugin = require('copy-webpack-plugin')
 const path = require('path')
 const { externals, cdn } = require('./config/ex.config')
 const plugins = require('./config/plugins.config')
@@ -13,14 +14,31 @@ const config = {
             sockHost: 'localhost',
             proxy: {
                 '/api': {
-                    target: 'http://120.25.195.4:31688',
+                    target: 'https://testmsrightsapi.tostar.top',
+                    secure: false,
                     changeOrigin: true,
-                }
+                },
+                '/commentApi': {
+                    target: 'https://testmscommentsapi.tostar.top/api',
+                    secure: false,
+                    changeOrigin: true,
+                    pathRewrite: {
+                        '^/commentApi': ''
+                    }
+                },
+                '/upload': {
+                    target: 'https://imgs.wbp5.com/api',
+                    changeOrigin: true,
+                    secure: false,
+                    pathRewrite: {
+                        '^/upload': ''
+                    }
+                },
             },
             hot: true
         },
         plugins,
-        devtool: debug ? 'cheap-module-eval-source-map' : '',
+        // devtool: debug ? 'cheap-module-eval-source-map' : '',
         externals,
         optimization: {
             // splitChunks: {
@@ -77,7 +95,6 @@ const config = {
                 symbolId: 'icon-[name]'
             })
             .end()
-
     },
     filenameHashing: false,
     pluginOptions: {
@@ -88,12 +105,18 @@ const config = {
                 path.resolve(__dirname, './src/common/style/variables.less'),
             ],
         },
+        'less-loader': {
+            lessOptions: {
+                modifyVars: { 'menuText': '#bfcbd9' },
+                javascriptEnabled: true,
+            }
+        }
     },
     css: {
 
         // 配置高于chainWebpack中关于css loader的配置
         // modules: true, // 是否开启支持‘foo.module.css’样式
-        extract: true, // 是否使用css分离插件 ExtractTextPlugin，采用独立样式文件载入，不采用<style>方式内联至html文件中
+        extract: false, // 是否使用css分离插件 ExtractTextPlugin，采用独立样式文件载入，不采用<style>方式内联至html文件中
         // sourceMap: false, // 是否在构建样式地图，false将提高构建速度
         // loaderOptions: { // css预设器配置项
         //     less: {

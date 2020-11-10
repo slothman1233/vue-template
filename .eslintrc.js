@@ -1,3 +1,4 @@
+const logLv = process.env.NODE_ENV === 'production' ? 'warn' : 'off'
 module.exports = {
     root: true,
     env: {
@@ -12,8 +13,8 @@ module.exports = {
         ecmaVersion: 2020,
     },
     rules: {
-        'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-        'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+        'no-console': logLv,
+        'no-debugger': logLv,
         // 'semi': 0,
         '@typescript-eslint/consistent-type-assertions': 0,
         '@typescript-eslint/ban-types': 0,
@@ -28,6 +29,7 @@ module.exports = {
         'class-methods-use-this': 0,
         '@typescript-eslint/no-inferrable-types': 0,
         '@typescript-eslint/type-annotation-spacing': 0,
+        '@typescript-eslint/no-non-null-assertion': 0,
         // indent: 0,
         '@typescript-eslint/no-var-requires': 0,
         '@typescript-eslint/camelcase': 0,

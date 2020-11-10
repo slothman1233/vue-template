@@ -1,22 +1,31 @@
+/*
+ * @Description:
+ * @Version: 0.1
+ * @Author: EveChee
+ * @Date: 2020-08-18 11:05:55
+ * @LastEditTime: 2020-09-24 10:59:04
+ */
 import './set-public-path'
 import singleSpaVue from 'single-spa-vue-mfe'
 import Vue from 'vue'
 import App from './App.vue'
-import router, { routes } from './router'
+import router from './router'
 import store from './store'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
 import '@/common/style/reset.less'
-// import '@/common/style/index.less'
+import '@stl/eve-vue2-lib/dist/EveVue2Lib.css'
+import ELEMENT from 'element-ui'
+import PreviewImg from '@/common/plugins/PreviewImg'
 import '@/common/icons'
-
-Vue.use(ElementUI)
+Vue.use(ELEMENT)
+Vue.use(PreviewImg)
+Vue.prototype.$ELEMENT = { size: 'mini' }
 Vue.config.productionTip = false
+
 
 const options = {
     router,
     store,
-    render: h => h(App),
+    render: (h: Function) => h(App),
 }
 
 // 独立渲染
