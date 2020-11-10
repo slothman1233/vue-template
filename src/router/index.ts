@@ -37,20 +37,7 @@ export const staticRoutes: Array<RouteConfig> = [
     }
 ]
 export const routes: Array<RouteConfig> = [
-    {
-        path: '/expose',
-        component: Layout,
-        meta: { title: '曝光管理', inTheBar: true, icon: 'el-icon-s-opportunity' },
-        children: [
-            {
-                path: 'list',
-                name: 'ExposeList',
-                component: () =>
-                    import(/* webpackChunkName: "ExposeList" */ '@/views/Expose/List.tsx'),
-                meta: { title: '曝光列表', inTheBar: true, icon: 'el-icon-tickets', permission: '6' /* 权限标识 */ },
-            },
-        ]
-    }
+
 ]
 
 const router = new VueRouter({
