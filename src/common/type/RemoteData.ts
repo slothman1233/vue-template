@@ -3,10 +3,14 @@
  * @Version: 0.1
  * @Author: EveChee
  * @Date: 2020-11-06 16:06:35
- * @LastEditTime: 2020-11-09 17:17:00
+ * @LastEditTime: 2020-11-11 09:48:44
  */
-import { UserInfoModel } from './UserData'
-
+import { UserCollectInfo, UserDetailModel, UserInfoModel } from './UserData'
+export interface SumUserInfo {
+    // 用户信息汇总数据模型
+    userBaseModel: UserCollectInfo
+    userDetailsModel: UserDetailModel
+}
 export enum AnswerType {
     // 回答类型
     All, // 全部
@@ -78,7 +82,7 @@ export enum BaseDataDisplayStatus {
     // 本项目基础共用显示状态
     All, // 全部
     Show, // 显示
-    Hide, // 隐藏
+    Hide, // 不显示
     Recycle, // 回收站
     OnlyUser, // 4、仅用户可见，5、
     OnlyCity, // 仅同城可见
@@ -87,7 +91,7 @@ export enum BaseDataDisplayStatusText {
     // 本项目基础共用显示状态
     All = '全部', // 全部
     Show = '显示', // 显示
-    Hide = '隐藏', // 隐藏
+    Hide = '不显示', // 不显示
     Recycle = '回收站', // 回收站
     OnlyUser = '仅用户可见', // 4、仅用户可见，5、
     OnlyCity = '仅同城可见', // 仅同城可见

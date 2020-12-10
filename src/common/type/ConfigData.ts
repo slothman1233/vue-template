@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Version: 0.1
+ * @Author: EveChee
+ * @Date: 2020-11-06 15:23:34
+ * @LastEditTime: 2020-11-10 14:07:22
+ */
 import { BaseDataDisplayStatus } from './RemoteData'
 
 export interface RankModel extends BaseAdminInfo {
@@ -41,14 +48,14 @@ export interface RankModel extends BaseAdminInfo {
 export interface StatModel {
     // 显示统计数据（综合）
 
-    todayCount: number
-    // 今日维权数
+    last7DaysCount: number
+    // 7日维权数
 
-    yesterdayCount: number
-    // 昨日维权数
+    last30DaysCount: number
+    // 30日维权数
 
-    yesterdayMoney: number
-    // 昨日维权金额
+    last30DaysMoney: number
+    // 30日维权金额
 
     yesterdayRecoverAmount: number
     // 昨日追回金额
@@ -57,7 +64,7 @@ export interface StatModel {
     // 累计追回金额
 
     peopleCount: number
-    // 累计维权人数
+    // 累计维权总数
 }
 
 export interface StatResModel {
@@ -65,4 +72,36 @@ export interface StatResModel {
     exposureReal: StatModel
     complaintsReal: StatModel
     virtual: StatModel
+}
+
+export enum RankType {
+    // 0、所有，1、红榜，2、黑榜 3曝光 4投诉
+    All,
+    Red,
+    Black,
+    Expose,
+    Complaint,
+}
+export enum RankTypeTabText {
+    // 0、所有，1、红榜，2、黑榜 3曝光 4投诉 给标签切换提供名称
+    All = 'All',
+    Red = 'Red',
+    Black = 'Black',
+    Expose = 'Expose',
+    Complaint = 'Complaint'
+}
+export interface HomeData {
+    // 首页工作台数据统计
+
+    waitQuestion: number
+    // 待回答提问
+
+    waitExposure: number
+    // 待审核曝光
+
+    waitComplaints: number
+    // 待审核投诉
+
+    waitComplaintsProgress: number
+    // 用户补充投诉待跟进
 }

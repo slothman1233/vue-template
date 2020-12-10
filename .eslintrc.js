@@ -1,20 +1,27 @@
-const logLv = process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+const consoleAndDebuggerLv =
+    process.env.NODE_ENV === 'production' ? 'off' : 'off'
 module.exports = {
     root: true,
     env: {
+        browser: true,
+        es2020: true,
         node: true,
     },
     extends: [
         'plugin:vue/essential',
         'eslint:recommended',
-        '@vue/typescript/recommended'
+        '@vue/typescript/recommended',
     ],
     parserOptions: {
         ecmaVersion: 2020,
+        ecmaFeatures: {
+            tsx: true,
+            jsx: true,
+        },
     },
     rules: {
-        'no-console': logLv,
-        'no-debugger': logLv,
+        'no-console': consoleAndDebuggerLv,
+        'no-debugger': consoleAndDebuggerLv,
         // 'semi': 0,
         '@typescript-eslint/consistent-type-assertions': 0,
         '@typescript-eslint/ban-types': 0,
@@ -30,34 +37,31 @@ module.exports = {
         '@typescript-eslint/no-inferrable-types': 0,
         '@typescript-eslint/type-annotation-spacing': 0,
         '@typescript-eslint/no-non-null-assertion': 0,
-        // indent: 0,
         '@typescript-eslint/no-var-requires': 0,
         '@typescript-eslint/camelcase': 0,
         '@typescript-eslint/no-this-alias': 0,
         '@typescript-eslint/no-unused-vars': 0,
         '@typescript-eslint/explicit-module-boundary-types': 0,
-        // 'prefer-const': 0,
         '@typescript-eslint/no-empty-function': 0,
-        'indent': [ // 缩进，4个空格，switch case语句缩进级别
+        indent: [
+            // 缩进，4个空格，switch case语句缩进级别
             'error',
             4,
             {
-                'SwitchCase': 1
-            }
+                SwitchCase: 1,
+            },
         ],
-        'curly': [ //必须使用 if(){} 中的{}
+        curly: [
+            //必须使用 if(){} 中的{}
             2,
-            'all'
+            'all',
         ],
-        'max-depth': [
-            0,
-            4
-        ], //嵌套块深度
+        'max-depth': [0, 4], //嵌套块深度
         'comma-spacing': 2, //逗号前后的空格
         'comma-style': [2, 'last'], //逗号风格，换行时在行首还是行尾
-        'key-spacing': [2, { 'beforeColon': false, 'afterColon': true }], //对象字面量中冒号的前后空格
-        'semi-spacing': [2, { 'before': false, 'after': true }], //分号前后空格
-        'space-unary-ops': [2, { 'words': true, 'nonwords': false }], //一元运算符的前/后要不要加空格
+        'key-spacing': [2, { beforeColon: false, afterColon: true }], //对象字面量中冒号的前后空格
+        'semi-spacing': [2, { before: false, after: true }], //分号前后空格
+        // 'space-unary-ops': [2, { words: true, nonwords: false }], //一元运算符的前/后要不要加空格
         'eqeqeq': 2, //必须使用全等
         'no-this-before-super': 2, //在调用super()之前不能使用this或super
         'no-undef': 2, //不能有未定义的变量
@@ -71,17 +75,19 @@ module.exports = {
         'no-duplicate-case': 2, //switch中的case标签不能重复
         'default-case': 2, //switch语句最后必须有default
         'valid-typeof': 2, //必须使用合法的typeof的值
-        'quotes': [ //single 强制使用单引号（double双引号，backtick反勾号）
+        'quotes': [
+            //single 强制使用单引号（double双引号，backtick反勾号）
             'error',
             'single',
             {
-                'allowTemplateLiterals': true
-            }
+                allowTemplateLiterals: true,
+            },
         ],
-        'semi': [ //never 强制不使用分号    always 强制使用分号
+        semi: [
+            //never 强制不使用分号    always 强制使用分号
             'error',
-            'never'
-        ]
+            'never',
+        ],
     },
     overrides: [
         {

@@ -7,10 +7,12 @@
 -->
 <template>
     <el-upload
+        id="appNameCommonImgUpload"
         :class="{ hide: hideUpload }"
         :file-list="fileList"
         :on-preview="handlePictureCardPreview"
         :on-remove="handleRemove"
+        :before-remove="beforeRemove"
         :on-error="handleError"
         :on-success="onSuccess"
         :on-progress="onProgress"
@@ -30,6 +32,7 @@ import { Component, Vue, Model, Emit, Ref, Prop } from 'vue-property-decorator'
 import { name as preview } from '@/common/plugins/PreviewImg'
 import { cloneDeep } from 'lodash'
 import { sign } from '../utils'
+import { ConfirmD } from '@/common/decorators/preposition.fn.decorator'
 @Component({
     name: 'Upload',
 })
@@ -62,11 +65,19 @@ export default class Upload extends Vue {
     }
 
     handlePictureCardPreview(file, ...args) {
-        const initialIndex = this.fileList.findIndex(_ => _ === file)
+        const initialIndex = this.fileList.findIndex((_) => _ === file)
         this[preview]({
             img: this.fileList,
             initialIndex,
         })
+    }
+    @ConfirmD<any>((file) => ({
+        tip: `确认删除附件嘛？`,
+        success: '操作成功',
+        unconfirm: Object.is(file.status, 'ready'),
+    }))
+    beforeRemove() {
+        return true
     }
     handleRemove(file, fileList) {
         const { url, response, uid } = file
@@ -75,11 +86,20 @@ export default class Upload extends Vue {
     }
     handleError(err, file, fileList) {
         console.log(err)
-        const { name: filename} = file
+        const { name: filename } = file
         this.$message.error(`${filename}上传失败`)
     }
     onSuccess(res, file, fileList) {
-        res && this.change(res.code === 0 ? [{ url: res.bodyMessage }] : fileList)
+        res &&
+            this.change(
+                res.code === 0
+                    ? [
+                        {
+                            url: res.bodyMessage,
+                        },
+                    ]
+                    : fileList
+            )
         this.$delete(this.abortList, file.uid)
     }
     onProgress(event) {
@@ -98,7 +118,7 @@ export default class Upload extends Vue {
             return
         } else {
             // 上传cando
-            cando.forEach(_ => this.upload.$refs['upload-inner'].upload(_))
+            cando.forEach((_) => this.upload.$refs['upload-inner'].upload(_))
         }
     }
     get signHeaders() {
@@ -107,8 +127,8 @@ export default class Upload extends Vue {
 }
 </script>
 
-<style scoped lang="less">
-.hide /deep/ .el-upload--picture-card {
+<style lang="less" scoped>
+#appNameCommonImgUpload.hide /deep/ .el-upload--picture-card {
     display: none;
 }
 </style>

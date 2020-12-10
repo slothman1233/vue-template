@@ -1,4 +1,4 @@
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop, Ref } from 'vue-property-decorator'
 @Component({
     name: 'TableRender',
 })
@@ -34,12 +34,19 @@ export default class TableRender extends Vue {
             ) : null
         )
     }
+    @Ref('table') readonly instance
+    setTableScroll(top:number){
+        if(this.instance){
+            this.instance.bodyWrapper.scrollTop = top
+        }
+    }
+
     render() {
         const selBox = this.showSelBox ? (
             <el-table-column type="selection" width="55"></el-table-column>
         ) : null
         return (
-            <el-table data={this.list} class="tb-box" border {...this.$attrs}>
+            <el-table data={this.list} class="tb-box" border {...this.$attrs} ref="table">
                 {selBox}
                 {this.tableColRender(this.tableData)}
             </el-table>

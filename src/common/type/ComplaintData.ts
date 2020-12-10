@@ -198,7 +198,8 @@ export interface ComplaintModel extends BaseAdminInfo, ExposeNQsNComplaintCommon
 
 export interface ComplaintProgressModel {
     // 投诉进度模型
-
+    // 是否前端临时数据
+    isTemp?:boolean
     status: BaseDataDisplayStatus
     // 数据显示状态（0、全部，1、显示，2、不显示，3、回收站，4、仅用户可见，5、仅同城可见）
 

@@ -9,7 +9,7 @@
             @keyup.enter.native="submitForm"
         >
             <div class="title-container">
-                <h3 class="title">维权{{title}}系统登录</h3>
+                <h3 class="title">{{titleText}}</h3>
             </div>
             <el-form-item prop="username">
                 <span class="svg-container">
@@ -41,12 +41,16 @@
                     @keyup.enter.native="submitForm"
                 />
                 <span class="show-pwd" @click="showPwd">
-                    <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+                    <svg-icon
+                        :icon-class="
+                            passwordType === 'password' ? 'eye' : 'eye-open'
+                        "
+                    />
                 </span>
             </el-form-item>
             <el-form-item>
                 <el-button
-                    style="width:100%;"
+                    style="width: 100%"
                     :loading="loginLoading"
                     type="primary"
                     @click="submitForm"
@@ -58,45 +62,58 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import { power } from '@/router'
 import http from '../utils/http'
+import { IS_MFE } from '@/main'
+import { LoadingD } from '@/common/decorators/preposition.fn.decorator'
+import { sendSelfMenu } from '@/utils'
 const TITLE_MAP = new Map<string, string>([
     ['dev', '开发环境'],
-    ['tests', '测试环境'],
+    ['test', '测试环境'],
     ['pre', '预发布环境'],
     ['prod', ''],
 ])
+const MFE_TITLE = 'FX110主站综合管理系统'
 @Component({
     components: {},
 })
 export default class Login extends Vue {
+    get titleText(){
+        return IS_MFE ? MFE_TITLE : `${this.subTitle}${this.title}登录`
+    }
+    @Prop() readonly subTitle!:string
     title = TITLE_MAP.get(process.env.NODE_ENV) || ''
     loginForm = {
-        username: process.env.NODE_ENV === 'dev' ? 'chiyi' : '',
-        pwd: process.env.NODE_ENV === 'dev' ? '123456' : '',
+        username: '',
+        pwd: '',
     }
 
     rules = {
-        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+        username: [
+            { required: true, message: '请输入用户名', trigger: 'blur' },
+        ],
         pwd: [{ required: true, message: '请输入密码', trigger: 'blur' }],
         code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
     }
 
     loginLoading = false
-
+    @LoadingD('loginLoading', 'loginNext')
     async submitForm() {
-        const valid = await (this.$refs['login'] as any).validate().catch(e => console.log(e))
-        if (!valid || this.loginLoading) {
+        const valid = await (this.$refs['login'] as any)
+            .validate()
+            .catch((e) => console.log(e))
+        if (!valid) {
             return
         }
-        this.loginLoading = true
-        const res = await power.login(this.loginForm)
-        this.loginLoading = false
+        return await power.login(this.loginForm)
+    }
+    loginNext(res) {
         if (!res) {
             return
         }
-        this.$router.replace('/').catch(e => console.log(e))
+        this.$router.replace('/').catch((e) => console.log(e))
+        // sendSelfMenu.call(this)
     }
     passwordType = 'password'
     showPwd() {

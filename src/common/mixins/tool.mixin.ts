@@ -5,12 +5,24 @@
  * @Date: 2020-05-28 09:51:53
  * @LastEditTime: 2020-11-03 19:52:10
  */
-import { Component, Vue, Watch, PropSync, Prop, Mixins, Ref } from 'vue-property-decorator'
-import { createAbort, EventUtil, fileSlice, getFileMD5, imageReaderToBase64 } from '@/utils'
+import {
+    Component,
+    Vue,
+    Watch,
+    PropSync,
+    Prop,
+    Mixins
+} from 'vue-property-decorator'
+import {
+    createAbort,
+    EventUtil,
+    fileSlice,
+    getFileMD5,
+    imageReaderToBase64,
+} from '@/utils'
 import { CHANGE_NETWORK } from '@/store/mutation-types'
 import { Mutation, State } from 'vuex-class'
 import { cloneDeep } from 'lodash'
-import { component } from 'vue/types/umd'
 /**
  * @Description: 网络状态监听
  * @param {type}
@@ -39,8 +51,12 @@ export class NetWorkListener extends Vue {
 
     get networkMsgOpts() {
         return {
-            type: this.network === NetWorkListener.ONLINE ? 'success' : 'warning',
-            text: this.network === NetWorkListener.ONLINE ? '网络已连接' : '网络已断开',
+            type:
+                this.network === NetWorkListener.ONLINE ? 'success' : 'warning',
+            text:
+                this.network === NetWorkListener.ONLINE
+                    ? '网络已连接'
+                    : '网络已断开',
         }
     }
 
@@ -61,7 +77,7 @@ export class NetWorkListener extends Vue {
  * @LastEditors: Eve
  * @LastEditTime: Do not edit
  */
-export const dialogOutShow = (prop = 'show') => {
+export function dialogOutShow(prop = 'show'){
     const propName: unique symbol = Symbol(prop)
     @Component
     class DialogOutShow extends Vue {
@@ -103,7 +119,7 @@ export const dialogOutShow = (prop = 'show') => {
 }
 
 // 需要数据备份的弹窗
-export const dialogBackup = (dataName, prop = 'v_show') => {
+export function dialogBackup(dataName, prop = 'v_show') {
     @Component
     class DialogBackup extends Vue {
         // 备份数据
@@ -135,9 +151,7 @@ import {
     imgUpload,
     uploadSlice,
     uploadSliceSuccess,
-    UPLOAD_VIDEO_SUBCODE,
 } from '../services/RemoteService'
-import { CancelTokenSource } from 'axios'
 @Component({
     components: { EveTinymce },
 })
@@ -147,6 +161,8 @@ export class TinyMce extends Vue {
     readonly tinyMceMenubar = menubar
     readonly tinyMceImgConfig = imageConfig
     readonly tinyMceVideoConfig = videoConfig
+    readonly tinyMceContentStyle =
+        'img{display:block;margin:32px auto 40px;max-width:75%;}'
     tinyMceImgUpload = imgUpload
     // 图片突破最大的爆点单位 和 大小限制
     tinyMceImgProps = { sizeName: '2M', maxSize: 2 * 1024 * 1024 }
@@ -167,21 +183,21 @@ export class HasUploadImg extends Mixins(HasAbortList, TinyMce) {
     async uploadImage(options) {
         const { file, data, onSuccess, onError, onProgress } = options
         const { uid } = file
-        const fileReader: FileReader = new FileReader()
         this.setAbortList(uid)
-        const res: any = await imageReaderToBase64(file, data, params =>
+        const res: any = await imageReaderToBase64(file, data, (params) =>
             this.tinyMceImgUpload(
                 params,
-                event => onProgress({ percent: (event.loaded / event.total) * 100 }),
+                (event) =>
+                    onProgress({ percent: (event.loaded / event.total) * 100 }),
                 this.abortList[uid]
             )
-        ).catch(e => {
+        ).catch((e) => {
             onError(e)
         })
         res && onSuccess(res, file)
     }
 }
-
+import SparkMD5 from 'spark-md5'
 // 包含视频分片上传的处理
 @Component
 export class HasUploadVideoInSlice extends Mixins(HasAbortList, TinyMce) {
@@ -219,7 +235,11 @@ export class HasUploadVideoInSlice extends Mixins(HasAbortList, TinyMce) {
             onError()
             return
         }
-        const { res: initRes, chunks } = await this.uploadVideoInit(ref, file, data)
+        const { res: initRes, chunks } = await this.uploadVideoInit(
+            ref,
+            file,
+            data
+        )
         if (!initRes) {
             // 初始化失败
             this.uploadVideoInitError(ref, file, onError)
@@ -267,12 +287,28 @@ export class HasUploadVideoInSlice extends Mixins(HasAbortList, TinyMce) {
             },
             abort
         )
-        const pass = res && +res.code === 0 && res.subCode.indexOf(UPLOAD_VIDEO_SUBCODE) !== -1
+        // const fileReader = new FileReader()
+        // fileReader.readAsBinaryString(chunks[idx])
+        // ;((MD5, res) => {
+        //     fileReader.onload = (e) => {
+        //         MD5.appendBinary(e.target?.result)
+        //         console.log(333, res, MD5.end())
+        //     }
+        // })(new SparkMD5(), res)
+        const pass = res && +res.code === 0 && /00$/.test(res.subCode)
         resArr.push(pass)
         const progress = Math.floor((next / chunks.length) * 100)
         if (pass) {
             ref.progressMsg(uid, progress, '正在努力上传...')
-            await this.videoSliceLoop(ref, uid, chunks, id, filename, resArr, next)
+            await this.videoSliceLoop(
+                ref,
+                uid,
+                chunks,
+                id,
+                filename,
+                resArr,
+                next
+            )
         } else {
             // 本条切片上传失败
             ref.progressMsg(uid, progress, '上传失败', 0)
@@ -280,19 +316,26 @@ export class HasUploadVideoInSlice extends Mixins(HasAbortList, TinyMce) {
     }
     // 检查是否每个都成功
     videoSliceCheck(resArr: any[]) {
-        return resArr.every(_ => _)
+        return resArr.every((_) => _)
     }
 }
 
 // 获取远程数据来初始化下拉的部分
 @Component
 export class GetRemoteTypeInit extends Vue {
-    async initSomeRemoteType(getFn: Function, key: string, isSel: boolean = false, ...args) {
+    async initSomeRemoteType(
+        getFn: Function,
+        key: string,
+        isSel: boolean = false,
+        ...args
+    ) {
         const res = await getFn(...args)
         if (!res) {
             throw new Error('获取远程数据失败')
         }
         const data = res.bodyMessage || res
-        this[key] = isSel ? data.map(_ => ({ label: _.value, value: +_.key })) : data
+        this[key] = isSel
+            ? data.map((_) => ({ label: _.value, value: +_.key }))
+            : data
     }
 }

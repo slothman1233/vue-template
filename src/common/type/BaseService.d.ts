@@ -30,6 +30,7 @@ declare interface BaseListData<T> extends BasePageParams {
 declare interface BaseSearchParams {
     // 关键字
     searchKey?: string
+    keywords?: string
     query?: string
 }
 declare interface BaseDelParams {

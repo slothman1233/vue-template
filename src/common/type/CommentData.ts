@@ -22,12 +22,113 @@ export enum CommentProductType {
 }
 // 评论类型
 export enum CommentType {
-    // 0、不限，1、回答，2、投诉、3、曝光，4、维权E时间
+    /*
+    /// <summary>
+        /// 不限
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// 回答
+        /// </summary>
+        Answer = 1,
+        /// <summary>
+        /// 投诉
+        /// </summary>
+        Complaints = 2,
+        /// <summary>
+        /// 曝光
+        /// </summary>
+        Exposure = 3,
+        /// <summary>
+        /// 专题
+        /// </summary>
+        Special = 4,
+        /// <summary>
+        /// 外汇书籍
+        /// </summary>
+        Book = 5,
+        /// <summary>
+        /// 交易商
+        /// </summary>
+        Enterprise = 6,
+        /// <summary>
+        /// 交易排行
+        /// </summary>
+        TransactionList = 7,
+        /// <summary>
+        /// 女神大赛
+        /// </summary>
+        Goddess = 8,
+        /// <summary>
+        /// BrokersShow展会新闻
+        /// </summary>
+        BrokersShowNew = 9,
+        /// <summary>
+        /// BrokersShow展会EN新闻
+        /// </summary>
+        BrokersShowENNew = 10,
+        /// <summary>
+        /// BrokersShow展会专题
+        /// </summary>
+        BrokersShowSpecial = 11,
+        /// <summary>
+        /// 文件集
+        /// </summary>
+        Files = 12,
+        /// <summary>
+        /// 代理商
+        /// </summary>
+        EnterpriseAgent = 13,
+        /// <summary>
+        /// 虚价交易商
+        /// </summary>
+        EnterpriseFalse = 14,
+        /// <summary>
+        /// 云评测
+        /// </summary>
+        Cloud = 15,
+        /// <summary>
+        /// 交易商口碑
+        /// </summary>
+        EntReputation = 16,
+        /// <summary>
+        /// 原油
+        /// </summary>
+        EnterpriseOil = 17,
+        /// <summary>
+        /// 黄金
+        /// </summary>
+        EnterpriseGold = 18,
+        /// <summary>
+        /// 维权E时间
+        /// </summary>
+        ETime = 28,
+        /// <summary>
+        /// 其他交易商
+        /// </summary>
+        OtherEnt = 30,
+        /// <summary>
+        /// 汇查查口碑打分评论
+        /// </summary>
+        HCCReputation = 31
+    */
     All,
     Answer,
     Complaint,
     Expose,
-    ETime,
+    Special,
+    Book,
+    Enterprise,
+    BrokersShowNew = 9,
+    BrokersShowENNew,
+    BrokersShowSpecial,
+    EnterpriseAgent = 13,
+    EnterpriseFalse,
+    Cloud,
+    EntReputation,
+    EnterpriseOil,
+    EnterpriseGold,
+    ETime = 28,
 }
 // 评论类型文字
 export enum CommentTypeText {
@@ -36,6 +137,18 @@ export enum CommentTypeText {
     Answer = '回答',
     Complaint = '投诉',
     Expose = '曝光',
+    Special = '专题',
+    Book = '外汇书籍',
+    Enterprise = '交易商',
+    BrokersShowNew = 'BrokersShow展会新闻',
+    BrokersShowENNew = 'BrokersShow展会EN新闻',
+    BrokersShowSpecial = 'BrokersShow展会专题',
+    EnterpriseAgent = '代理商',
+    EnterpriseFalse = '虚假交易商',
+    Cloud = '云评测',
+    EntReputation = '交易商口碑',
+    EnterpriseOil = '原油',
+    EnterpriseGold = '黄金',
     ETime = '维权E时间',
 }
 // 评论显示状态

@@ -9,6 +9,7 @@
 declare interface SelectModel {
   label: string
   value: numOrStr
+  id?:any // 其他特殊标识
 }
 declare type numOrStr = number | string
 // 表格字段tsx类型

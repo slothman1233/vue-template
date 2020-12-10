@@ -70,10 +70,12 @@ export default class PageSome extends Vue {
         const offsetTop = this._tbel?.offsetTop
         // 可视区域高度
         const height = this._document?.scrollHeight
-        //可供使用的区域高度
-        this.maxTableHeight = height - offsetTop - 130
+        //可供使用的区域高度 130是底部按钮加页码的高度
+        this.maxTableHeight =
+            height - offsetTop - 130 - this.pageSomeCustomTableDiffHeight
     }
-
+    // 自定义表格高度差
+    pageSomeCustomTableDiffHeight: number = 0
     // 弹窗显示
     showAddDialog = false
     // 弹窗临时数据
@@ -91,7 +93,7 @@ export default class PageSome extends Vue {
     // 当前正在编辑 -1没有
     nowEditIndex = -1
     // 分页属性
-    get paginationProps() {
+    paginationProps() {
         return {
             props: {
                 background: true,
@@ -100,6 +102,48 @@ export default class PageSome extends Vue {
                 'page-size': this.pageSize,
                 'current-page': this.pageIndex,
             },
+            on: {
+                'current-change': (val) => {
+                    this.pageIndex = val
+                    this.getList()
+                    this.table && this.table.setTableScroll(0)
+                },
+            },
+        }
+    }
+    defaultDialogCommon() {
+        // 弹窗公共属性
+        return {
+            props: {
+                show: this.showAddDialog,
+                temp: this.dialogTemp,
+                mode: this.dialogMode,
+            },
+            on: {
+                'update:temp': (val) => (this.dialogTemp = val),
+                'update:show': (val) => (this.showAddDialog = val),
+                'update': this.getList,
+            },
+            attrs: { 'destroy-on-close': true },
+        }
+    }
+    tableCommon({ list, cols, scopedSlots }) {
+        // 表格公共
+        return {
+            ref: 'table',
+            props: {
+                list,
+                tableData: cols,
+            },
+            attrs: {
+                props: {
+                    'max-height': this.maxTableHeight || null,
+                    stripe: true,
+                    'header-cell-class-name': 'table-header-style',
+                },
+            },
+            scopedSlots,
+            directives: [{ name: 'loading', value: this.pageSomeLoading }],
         }
     }
 
@@ -121,6 +165,10 @@ export default class PageSome extends Vue {
     }
 
     destroyed() {
-        EventUtil.removeHandler(window, 'resize', this.pageSomeChangeTableHeight)
+        EventUtil.removeHandler(
+            window,
+            'resize',
+            this.pageSomeChangeTableHeight
+        )
     }
 }

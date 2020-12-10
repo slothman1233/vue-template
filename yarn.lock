@@ -1382,19 +1382,19 @@
   resolved "https://registry.npm.taobao.org/@soda/get-current-script/download/@soda/get-current-script-1.0.0.tgz#623aa40623550e3b94767cffeb096a6fb597ed09"
   integrity sha1-YjqkBiNVDjuUdnz/6wlqb7WX7Qk=
 
-"@stl/eve-vue2-lib@0.1.19":
-  version "0.1.19"
-  resolved "http://47.113.105.208:8088/@stl%2feve-vue2-lib/-/eve-vue2-lib-0.1.19.tgz#da33da387f3ede03b42a3d4796e6911aa723aea6"
-  integrity sha512-7QeyGkuFHuf61Ck0FPgrUtA4Id6hnHqqQJVHtbr8AE3m3l/OCiWSX8emnGmBhA2Js69CGoDiawXhgbwj9ahepQ==
+"@stl/eve-vue2-lib@0.1.24":
+  version "0.1.24"
+  resolved "http://47.113.105.208:8088/@stl%2feve-vue2-lib/-/eve-vue2-lib-0.1.24.tgz#eae7a486c2fde36c88a8f327ea1c83df50db7ab5"
+  integrity sha512-TiFStF7l01f0Hg1y4w+daoB1rW/RYhgBau33PYUHm39iKLxXtrdsZxHE9ORzhaPi07qxPjXC3dbfHqvvXklQIQ==
   dependencies:
     vue-class-component "^7.2.3"
     vue-property-decorator "^9.0.0"
     vue-tsx-support "^2.3.3"
 
-"@stl/power-plugin@1.0.9":
-  version "1.0.9"
-  resolved "http://47.113.105.208:8088/@stl%2fpower-plugin/-/power-plugin-1.0.9.tgz#ba5b082ed2e8b73c56c56799d2b943894c0050dd"
-  integrity sha512-AwflK1ynimSFM6uVVn56lFhVxEXCYj0dJPLjf/VKBl5PRmvYmgYixw/BtLvWT9J/Q8U1Xh3rSaKFNuz7iMntwA==
+"@stl/power-plugin@1.2.2":
+  version "1.2.2"
+  resolved "http://47.113.105.208:8088/@stl%2fpower-plugin/-/power-plugin-1.2.2.tgz#9f79299a0a8cdeee9cc85197164186f67e79acf3"
+  integrity sha512-QMumwsTI3VO1hmBMSPDlAFca24glOFNhrc+CAixeiIICztFRI1Pd8Sum43hH7l2GFFtfzSJUoPZGw4udBcovVg==
   dependencies:
     "@stl/request" "1.2.0"
     "@stl/tool-ts" "^0.5.6"
@@ -1456,10 +1456,10 @@
     axios "^0.19.2"
     qs "^6.9.4"
 
-"@stl/request@1.2.2":
-  version "1.2.2"
-  resolved "http://47.113.105.208:8088/@stl%2frequest/-/request-1.2.2.tgz#36ea4e94bb5ab665b187f1188f626d0ed37ff426"
-  integrity sha512-YGWjcZfv+3hTup+kungHQg0ywFTkOiPsqJ28xLNpJK2KrLtJsM674DIFqCGP/GpQtacbABW/024sBm/8oCQxjQ==
+"@stl/request@1.2.6":
+  version "1.2.6"
+  resolved "http://47.113.105.208:8088/@stl%2frequest/-/request-1.2.6.tgz#99cc01962cb926e1b98410ec0968d81f1397c91c"
+  integrity sha512-Q+hwe4s33U2aE6LOpEv37yAAuhfxfyDpiYzw6pIPCKsK4ufE9QPg3QnmnVCrAnBT5xIjKcCWsLJ+3Y5YJkLZew==
   dependencies:
     "@babel/polyfill" "^7.10.4"
     "@types/qs" "^6.9.4"
@@ -2072,6 +2072,13 @@
     eslint-import-resolver-node "^0.3.3"
     eslint-import-resolver-webpack "^0.11.1"
     eslint-plugin-import "^2.18.2"
+
+"@vue/eslint-config-prettier@^6.0.0":
+  version "6.0.0"
+  resolved "http://47.113.105.208:8088/@vue%2feslint-config-prettier/-/eslint-config-prettier-6.0.0.tgz#ad5912b308f4ae468458e02a2b05db0b9d246700"
+  integrity sha1-rVkSswj0rkaEWOAqKwXbC50kZwA=
+  dependencies:
+    eslint-config-prettier "^6.0.0"
 
 "@vue/eslint-config-typescript@^5.0.2":
   version "5.0.2"
@@ -4484,6 +4491,11 @@ coa@^2.0.2:
     chalk "^2.4.1"
     q "^1.1.2"
 
+coalescy@1.0.0:
+  version "1.0.0"
+  resolved "http://47.113.105.208:8088/coalescy/-/coalescy-1.0.0.tgz#4b065846b836361ada6c4b4a4abf4bc1cac31bf1"
+  integrity sha1-SwZYRrg2NhrabEtKSr9LwcrDG/E=
+
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.npm.taobao.org/code-point-at/download/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
@@ -6014,6 +6026,25 @@ eslint-config-airbnb-base@^14.0.0:
     object.assign "^4.1.0"
     object.entries "^1.1.1"
 
+eslint-config-prettier@^6.0.0:
+  version "6.15.0"
+  resolved "http://47.113.105.208:8088/eslint-config-prettier/-/eslint-config-prettier-6.15.0.tgz#7f93f6cb7d45a92f1537a70ecc06366e1ac6fed9"
+  integrity sha1-f5P2y31FqS8VN6cOzAY2bhrG/tk=
+  dependencies:
+    get-stdin "^6.0.0"
+
+eslint-friendly-formatter@^4.0.1:
+  version "4.0.1"
+  resolved "http://47.113.105.208:8088/eslint-friendly-formatter/-/eslint-friendly-formatter-4.0.1.tgz#27d504dc837f7caddbf201b2e84a4ee730ba3efa"
+  integrity sha1-J9UE3IN/fK3b8gGy6EpO5zC6Pvo=
+  dependencies:
+    chalk "^2.0.1"
+    coalescy "1.0.0"
+    extend "^3.0.0"
+    minimist "^1.2.0"
+    strip-ansi "^4.0.0"
+    text-table "^0.2.0"
+
 eslint-import-resolver-node@^0.3.2, eslint-import-resolver-node@^0.3.3:
   version "0.3.3"
   resolved "https://registry.npm.taobao.org/eslint-import-resolver-node/download/eslint-import-resolver-node-0.3.3.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-import-resolver-node%2Fdownload%2Feslint-import-resolver-node-0.3.3.tgz#dbaa52b6b2816b50bc6711af75422de808e98404"
@@ -6074,6 +6105,13 @@ eslint-plugin-import@^2.18.2, eslint-plugin-import@^2.20.2:
     object.values "^1.1.0"
     read-pkg-up "^2.0.0"
     resolve "^1.12.0"
+
+eslint-plugin-prettier@^3.1.4:
+  version "3.2.0"
+  resolved "http://47.113.105.208:8088/eslint-plugin-prettier/-/eslint-plugin-prettier-3.2.0.tgz#af391b2226fa0e15c96f36c733f6e9035dbd952c"
+  integrity sha1-rzkbIib6DhXJbzbHM/bpA129lSw=
+  dependencies:
+    prettier-linter-helpers "^1.0.0"
 
 eslint-plugin-vue@^6.2.2:
   version "6.2.2"
@@ -6506,6 +6544,11 @@ fast-deep-equal@^3.1.1:
   version "3.1.1"
   resolved "https://registry.npm.taobao.org/fast-deep-equal/download/fast-deep-equal-3.1.1.tgz#545145077c501491e33b15ec408c294376e94ae4"
   integrity sha1-VFFFB3xQFJHjOxXsQIwpQ3bpSuQ=
+
+fast-diff@^1.1.2:
+  version "1.2.0"
+  resolved "http://47.113.105.208:8088/fast-diff/-/fast-diff-1.2.0.tgz#73ee11982d86caaf7959828d519cfe927fac5f03"
+  integrity sha1-c+4RmC2Gyq95WYKNUZz+kn+sXwM=
 
 fast-glob@^2.2.6:
   version "2.2.7"
@@ -7039,6 +7082,11 @@ get-stdin@^4.0.1:
   version "4.0.1"
   resolved "http://47.113.105.208:8088/get-stdin/-/get-stdin-4.0.1.tgz#b968c6b0a04384324902e8bf1a5df32579a450fe"
   integrity sha1-uWjGsKBDhDJJAui/Gl3zJXmkUP4=
+
+get-stdin@^6.0.0:
+  version "6.0.0"
+  resolved "http://47.113.105.208:8088/get-stdin/-/get-stdin-6.0.0.tgz#9e09bf712b360ab9225e812048f71fde9c89657b"
+  integrity sha1-ngm/cSs2CrkiXoEgSPcf3pyJZXs=
 
 get-stream@^3.0.0:
   version "3.0.0"
@@ -12347,10 +12395,22 @@ preserve@^0.2.0:
   resolved "https://registry.npmjs.org/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
   integrity sha1-gV7R9uvGWSb4ZbMQwHE7yzMVzks=
 
+prettier-linter-helpers@^1.0.0:
+  version "1.0.0"
+  resolved "http://47.113.105.208:8088/prettier-linter-helpers/-/prettier-linter-helpers-1.0.0.tgz#d23d41fe1375646de2d0104d3454a3008802cf7b"
+  integrity sha1-0j1B/hN1ZG3i0BBNNFSjAIgCz3s=
+  dependencies:
+    fast-diff "^1.1.2"
+
 prettier@^1.18.2:
   version "1.19.1"
   resolved "https://registry.npm.taobao.org/prettier/download/prettier-1.19.1.tgz?cache=0&sync_timestamp=1587491448785&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fprettier%2Fdownload%2Fprettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
   integrity sha1-99f1/4qc2HKnvkyhQglZVqYHl8s=
+
+prettier@^2.1.2:
+  version "2.2.1"
+  resolved "http://47.113.105.208:8088/prettier/-/prettier-2.2.1.tgz#795a1a78dd52f073da0cd42b21f9c91381923ff5"
+  integrity sha1-eVoaeN1S8HPaDNQrIfnJE4GSP/U=
 
 pretty-error@^2.0.2:
   version "2.1.1"
@@ -13646,11 +13706,12 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-single-spa-vue-mfe@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npm.taobao.org/single-spa-vue-mfe/download/single-spa-vue-mfe-1.0.1.tgz#d3db78c7efdb8f0bdc58f0708b526810acc77a99"
-  integrity sha1-09t4x+/bjwvcWPBwi1JoEKzHepk=
+single-spa-vue-mfe@^1.0.3:
+  version "1.0.3"
+  resolved "http://47.113.105.208:8088/single-spa-vue-mfe/-/single-spa-vue-mfe-1.0.3.tgz#3bc1b5e89c12d19d12958e512c6d7095c947f2d9"
+  integrity sha512-8wIDDI9vFEvGf70f2tOpD6KnJYtIgevtmrIgCnEVbdsZGasiJPQWJB9SSZTfsxuc0CYT4JTFEx6PN/ETRghjMA==
   dependencies:
+    typescript "^4.1.2"
     vue "^2.6.11"
 
 single-spa-vue@^1.5.2:
@@ -14955,6 +15016,11 @@ typescript@^3.9.7:
   resolved "http://47.113.105.208:8088/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
   integrity sha1-mNYApevcOPQMsndSLxLcgA6eJfo=
 
+typescript@^4.1.2:
+  version "4.1.2"
+  resolved "http://47.113.105.208:8088/typescript/-/typescript-4.1.2.tgz#6369ef22516fe5e10304aae5a5c4862db55380e9"
+  integrity sha1-Y2nvIlFv5eEDBKrlpcSGLbVTgOk=
+
 typescript@~3.8.3:
   version "3.8.3"
   resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.8.3.tgz#409eb8544ea0335711205869ec458ab109ee1061"
@@ -15338,10 +15404,10 @@ vue-class-component@^7.1.0, vue-class-component@^7.2.3:
   resolved "https://registry.npm.taobao.org/vue-class-component/download/vue-class-component-7.2.3.tgz#a5b1abd53513a72ad51098752e2dedd499807cca"
   integrity sha1-pbGr1TUTpyrVEJh1Li3t1JmAfMo=
 
-vue-cli-plugin-stlmfe@~1.0.15:
-  version "1.0.15"
-  resolved "http://47.113.105.208:8088/vue-cli-plugin-stlmfe/-/vue-cli-plugin-stlmfe-1.0.15.tgz#195fa70e3ca50a4821137bb5aaf073999fc59720"
-  integrity sha512-dq+JBR4JsW1AxgKnuAuUyKDzdd8UtUEEyJo8bQUAbdw3qStTCKHPxEQzOD/g5qrsu0jRc1VRdp2LL9BoSwYXEw==
+vue-cli-plugin-stlmfe@^1.0.18:
+  version "1.0.18"
+  resolved "http://47.113.105.208:8088/vue-cli-plugin-stlmfe/-/vue-cli-plugin-stlmfe-1.0.18.tgz#06127a8409488d6814adb5c90145acd7a6d39434"
+  integrity sha512-oWC6m/cNHYQgNbXCcc0mRgDw/MtgbinXZ0Cz0Khecpdl/FhnMGePaEU+59XUALMBhI3gG8ZRA8NcJX5JRuGYiw==
 
 vue-cli-plugin-style-resources-loader@~0.1.4:
   version "0.1.4"

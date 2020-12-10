@@ -6,7 +6,8 @@
  * @LastEditTime: 2020-11-09 14:15:52
  */
 interface CreateTipOpts<T> {
-    (data: T): { tip: string; success: string }
+    // unconfirm 会有不需要确认的场景
+    (data: T): { tip: string; success: string; unconfirm?: boolean }
 }
 import { MessageBox, Message } from 'element-ui'
 /**
@@ -21,14 +22,16 @@ export const ConfirmD = <T>(createTip: CreateTipOpts<T>) => (
     descriptor: PropertyDescriptor
 ) => {
     const oldFn = descriptor.value
-    descriptor.value = async function(row: T, ...args) {
-        const { tip, success } = createTip.apply(this, [row])
-        const confirm = await MessageBox.confirm(tip).catch(e => e)
+    descriptor.value = async function (row: T, ...args) {
+        const { tip, success, unconfirm } = createTip.apply(this, [row])
+        const confirm = !unconfirm
+            ? await MessageBox.confirm(tip).catch((e) => e)
+            : true
         if (confirm === 'cancel') {
-            return
+            return Promise.reject()
         }
         const res = await oldFn.apply(this, [row, ...args])
-        res && Message.success(success)
+        res && !unconfirm && Message.success(success)
         return res
     }
 }
@@ -39,7 +42,11 @@ export const LoadingD = (loading: string, next?: string) => (
     descriptor: PropertyDescriptor
 ) => {
     const oldFn = descriptor.value
-    descriptor.value = async function(this: any, ...args) {
+    descriptor.value = async function (this: any, ...args) {
+        if (this[loading]) {
+            // Loading时间内 重复点击
+            return
+        }
         this[loading] = true
         const res = await oldFn.apply(this, args)
         this[loading] = false

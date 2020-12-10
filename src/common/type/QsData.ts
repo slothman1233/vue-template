@@ -30,3 +30,7 @@ export interface QsModel extends BaseAdminInfo, ExposeNQsNComplaintCommon {
     lastUpdateTime: string
     // 最后修改日期
 }
+export interface ListByUserIdParams extends BasePageParams {
+    // 用户Id
+    userId:number
+}

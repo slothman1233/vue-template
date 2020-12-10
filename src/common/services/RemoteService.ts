@@ -3,32 +3,60 @@
  * @Version: 0.1
  * @Author: EveChee
  * @Date: 2020-09-18 12:01:07
- * @LastEditTime: 2020-11-09 17:45:58
+ * @LastEditTime: 2020-11-11 10:46:14
  */
 import { injectionAdminInfo } from '@/utils'
 import http from '@/utils/http'
 import { SYMBOL_FILENAME } from '@stl/request'
 import { CancelTokenSource } from 'axios'
-import { AnswerModel, AnswerType, BaseDataDisplayStatus } from '../type/RemoteData'
+import { DealerTemplateType, EntFilterModel, EntStatusType, EntType } from '../type/DealerData'
+import {
+    AnswerModel,
+    AnswerType,
+    BaseDataDisplayStatus,
+    SumUserInfo,
+} from '../type/RemoteData'
+export const UPLOAD_VIDEO_SUBCODE = '50E00000'
 export type TypesModel = { key: number; value: string }[]
-// 所有平台查询——分页
-export const getNameDictByType = (params?: NameDictParams) => {
-    return http.get<any>('/api/Remote/GetNameDictByType', { params })
+// 所有平台查询——分页---徐毅
+// export const getNameDictByType = (params?: NameDictParams) => {
+//     return http.get<any>('/api/Remote/GetNameDictByType', { params })
+// }
+// 所有平台查询——分页---瑶哥
+export const getNameDictByType = (params: GetDealerListParams) =>
+    http.get<BaseListData<EntFilterModel>>('/platApi/EntName/GetPagedList', {
+        params,
+    })
+export interface GetDealerListParams extends BasePageParams, BaseSearchParams {
+    //平台类型，默认 0 全部，1 交易商，2 香港黄金，3 虚假交易商，4 原油期货，10 代理商，12 资金盘，13 股票期货
+    entType: EntType
+    // 店铺模板类型，-1 全部，0 默认普通店铺，1 金牌店铺，2 银牌店铺
+    tempType: DealerTemplateType
+    // 状态，-1 全部，0 未显示，1 已显示
+    status: EntStatusType
+    // 排序类型：0 默认排序号，1 名称
+    sortType?: number
 }
+
 interface NameDictParams {
     // 1 外汇交易商，2 黄金交易商，3 虚假交易商，4 原油交易商，10 代理商
     type: number
-    // true 默认 已显示，fasle 所有
-    status: boolean
-    //  0所有 10汇查查 1汇聊 2FX110官网
-    productId: number
+    // 1 默认 2 所有
+    status: number
+    //  0所有 10汇查查 1汇聊 2FX110官网 2020年11月14日11:53:35 API删除
+    // productId: number
 }
 // 图片上传
-export const imgUpload = (data: any, onUploadProgress?: any, abort?: CancelTokenSource) =>
-    http.post<string>('/upload/image', data, {
+export const imgUpload = (
+    data: any,
+    onUploadProgress?: any,
+    abort?: CancelTokenSource
+) =>
+    http.post<string>('/upload/image/new', data, {
         cancelToken: abort?.token,
         unErrorMsg: true,
         onUploadProgress,
+        selfSign: () => {},
     })
 interface SliceInitModel {
     FileName?: string
@@ -45,10 +73,14 @@ interface SliceInitModel {
     containsDataPath?: string
 }
 // 文件分片初始化
-export const fileSliceInit = (data: SliceInitModel, abort?: CancelTokenSource) =>
+export const fileSliceInit = (
+    data: SliceInitModel,
+    abort?: CancelTokenSource
+) =>
     http.post<{ id: string }>('/upload/File/InitiateMultipartUpload', data, {
         cancelToken: abort?.token,
         unErrorMsg: true,
+        selfSign: () => {},
     })
 // 文件分片上传
 interface SliceParamsModel {
@@ -58,8 +90,10 @@ interface SliceParamsModel {
     filename: string
 }
 
-export const UPLOAD_VIDEO_SUBCODE = '50E00000'
-export const uploadSlice = (params: SliceParamsModel, abort?: CancelTokenSource) => {
+export const uploadSlice = (
+    params: SliceParamsModel,
+    abort?: CancelTokenSource
+) => {
     const { file, filename, id, index } = params
     return http.post<any>(
         `/upload/File/UploadPart?id=${id}&index=${index}`,
@@ -67,9 +101,9 @@ export const uploadSlice = (params: SliceParamsModel, abort?: CancelTokenSource)
         {
             queryType: 'formd',
             timeout: 0,
-            codes: { sures: ['30E00000', UPLOAD_VIDEO_SUBCODE] },
             cancelToken: abort?.token,
             unErrorMsg: true,
+            selfSign: () => {},
         }
     )
 }
@@ -80,33 +114,46 @@ export const uploadSliceSuccess = (id: string, abort?: CancelTokenSource) =>
         timeout: 0,
         cancelToken: abort?.token,
         unErrorMsg: true,
+        selfSign: () => {},
     })
 // 获取产品类型
 export const getProductTypes = (isDefault?: boolean) =>
-    http.get<TypesModel>('/api/Common/GetProductType', { params: { isDefault } })
+    http.get<TypesModel>('/api/Common/GetProductType', {
+        params: { isDefault },
+    })
 // 获取用户信息以及问题曝光汇总
 // 用户汇总信息模型
+
 type SumUserInfoModel = {
     complaintsCount: number
     exposureCount: number
     questionCount: number
-    userInfo: any
+    userInfo: SumUserInfo
 }
 // 获取用户汇总信息
 export const getSumUserInfo = (userId: number) =>
-    http.get<SumUserInfoModel>('/api/UserCollect/QueryByUser', { params: { userId } })
+    http.get<SumUserInfoModel>('/api/UserCollect/QueryByUser', {
+        params: { userId },
+    })
 // 获取曝光进度表
 export const getExposureProcessState = (isDefault?: boolean) =>
-    http.get<TypesModel>('/api/Common/GetExposureProcessState', { params: { isDefault } })
+    http.get<TypesModel>('/api/Common/GetExposureProcessState', {
+        params: { isDefault },
+    })
 // 获取提问进度表
 export const getQsProcessState = (isDefault?: boolean) =>
-    http.get<TypesModel>('/api/Common/GetQuestionProcessState', { params: { isDefault } })
+    http.get<TypesModel>('/api/Common/GetQuestionProcessState', {
+        params: { isDefault },
+    })
 // 获取曝光类型
-export const getExposureTypes = () => http.get<TypesModel>('/api/Common/GetExposureType')
+export const getExposureTypes = () =>
+    http.get<TypesModel>('/api/Common/GetExposureType')
 // 获取投诉类型
-export const getComplaintsTypes = () => http.get<TypesModel>('/api/Common/GetComplaintsType')
+export const getComplaintsTypes = () =>
+    http.get<TypesModel>('/api/Common/GetComplaintsType')
 // 获取诉求类型
-export const getAppealTypes = () => http.get<TypesModel>('/api/Common/GetComplaintsRightsOfAppeal')
+export const getAppealTypes = () =>
+    http.get<TypesModel>('/api/Common/GetComplaintsRightsOfAppeal')
 // 获取所有回答 对应投诉和曝光其实就是进度
 export const getAllProcess = (data: AnswerParams) => {
     data.viewUserId = -10
@@ -114,31 +161,50 @@ export const getAllProcess = (data: AnswerParams) => {
 }
 // 获取所有回答分页
 export const getAllAnswerList = (params: AdminAnswerParams) => {
-    return http.get<BaseListData<AnswerModel>>('/api/Answer/GetByPage', { params })
+    return http.get<BaseListData<AnswerModel>>('/api/Answer/GetByPage', {
+        params,
+    })
 }
 
 // 提交问答或曝光进度|回答
-export const pushAnswer = (data: PushAnswerParams) => http.post<any>('/api/Answer/Add', data)
+export const pushAnswer = (data: PushAnswerParams) =>
+    http.post<any>('/api/Answer/Add', data)
 export const updateAnswer = (data: UpdateAnswerParams) =>
-    http.put<any>('/api/Answer/UpdateAnswer', injectionAdminInfo<UpdateAnswerParams>(data))
+    http.put<any>(
+        '/api/Answer/UpdateAnswer',
+        injectionAdminInfo<UpdateAnswerParams>(data)
+    )
 export const delAnswer = (data: DelAnswerParams) =>
     http.put<any>('/api/Answer/UpdateStatus', data, { queryType: 'text' })
 
 // 获取回答审核状态
 export const getAnswerAuditStatus = (isDefault: boolean = false) =>
-    http.get<TypesModel>('/api/Common/GetAnswerProcessState', { params: { isDefault } })
+    http.get<TypesModel>('/api/Common/GetAnswerProcessState', {
+        params: { isDefault },
+    })
 // 获取回答原因状态
 export const getAnswerReasonStatus = (isDefault: boolean = false) =>
-    http.get<TypesModel>('/api/Common/GetAnswerProcessReasonState', { params: { isDefault } })
+    http.get<TypesModel>('/api/Common/GetAnswerProcessReasonState', {
+        params: { isDefault },
+    })
 // 审核通过回答
 export const updateAnswerPass = (data: UpdateAnswerAuditParams) =>
-    http.put('/api/Answer/Verified', injectionAdminInfo<UpdateAnswerAuditParams>(data))
+    http.put(
+        '/api/Answer/Verified',
+        injectionAdminInfo<UpdateAnswerAuditParams>(data)
+    )
 // 审核不通过回答 包含未审核
 export const updateAnswerUnPass = (data: UpdateAnswerUnPassParams) =>
-    http.put('/api/Answer/VerifyFail', injectionAdminInfo<UpdateAnswerUnPassParams>(data))
-    // 回答审核重置
+    http.put(
+        '/api/Answer/VerifyFail',
+        injectionAdminInfo<UpdateAnswerUnPassParams>(data)
+    )
+// 回答审核重置
 export const updateAnswerReset = (data: UpdateAnswerAuditParams) =>
-    http.put('/api/Answer/VerifyReset', injectionAdminInfo<UpdateAnswerAuditParams>(data))
+    http.put(
+        '/api/Answer/VerifyReset',
+        injectionAdminInfo<UpdateAnswerAuditParams>(data)
+    )
 
 interface AdminAnswerParams extends BaseListParams, BaseSearchParams {
     answerType: AnswerType

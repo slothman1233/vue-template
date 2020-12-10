@@ -6,90 +6,112 @@
  * @LastEditTime: 2020-07-08 17:56:20
 -->
 <template>
-  <div class="power-home">
-    <h3 class="dashbord-title">移动端：</h3>
-    <el-row class="dashbord-box" type="flex" justify="space-between" :gutter="30">
-      <el-col>
-        <DashTab title="最新" icon="el-icon-user" :pv="999" :uv="999" :addPV="123" :addUV="333" />
-      </el-col>
-      <el-col>
-        <DashTab
-          title="全部"
-          icon="el-icon-copy-document"
-          :pv="999"
-          :uv="999"
-          :addPV="123"
-          :addUV="333"
-          bgColor="#6ECAF8"
-        />
-      </el-col>
-      <el-col>
-        <DashTab
-          title="我的"
-          icon="el-icon-data-line"
-          :pv="999"
-          :uv="999"
-          :addPV="123"
-          :addUV="333"
-          bgColor="#18DFE5"
-        />
-      </el-col>
-    </el-row>
-    <h3 class="dashbord-title">PC端：{{ testBtn }}</h3>
-    <el-row class="dashbord-box" :gutter="30" type="flex" justify="space-between">
-      <el-col>
-        <DashTab
-          title="首页"
-          icon="el-icon-chat-line-round"
-          :pv="999"
-          :uv="999"
-          :addPV="123"
-          :addUV="333"
-          bgColor="#1DD3B6"
-        />
-      </el-col>
-      <el-col>
-        <DashTab
-          title="目录页"
-          icon="el-icon-chat-line-round"
-          :pv="999"
-          :uv="999"
-          :addPV="123"
-          :addUV="333"
-          bgColor="#1DD3B6"
-        />
-      </el-col>
-      <el-col :span="7"></el-col>
-    </el-row>
-
-    <div class="dashbord-box">
-      <!-- 下部 -->
-      <Chart></Chart>
-    </div>
-  </div>
+    <section class="power-home" v-loading="loading">
+        <h1 class="power-title">维权中心待办</h1>
+        <section class="home-item">
+            <h3>待审核:</h3>
+            <div class="item-con" @click="jumpToList('/qs/list')">
+                <p>问答</p>
+                <p>{{ dataForm.waitQuestion }}</p>
+            </div>
+            <div class="item-con" @click="jumpToList('/expose/list')">
+                <p>曝光</p>
+                <p>{{ dataForm.waitExposure }}</p>
+            </div>
+            <div class="item-con" @click="jumpToList('/complaints/list')">
+                <p>投诉</p>
+                <p>{{ dataForm.waitComplaints }}</p>
+            </div>
+        </section>
+        <section class="home-item">
+            <h3>用户补充投诉待跟进:</h3>
+            <div class="item-con" @click="jumpToList('/complaints/list', {workType: '1'})">
+                <p>投诉</p>
+                <p>{{ dataForm.waitComplaintsProgress }}</p>
+            </div>
+        </section>
+    </section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import DashTab from './components/DashTab.vue'
-import Chart from './components/Chart.vue'
 import { power } from '@/router'
+import { getAdminIndexData } from '@/common/services/ConfigService'
+import { HomeData } from '@/common/type/ConfigData'
+import { LoadingD } from '@/common/decorators/preposition.fn.decorator'
+
 @Component({
     name: 'Home',
-    components: { DashTab, Chart },
 })
 export default class Home extends Vue {
-  @power.HasBtn('user:copy')
-  testBtn!: boolean
+    created() {
+        this.getData()
+    }
+    dataForm: HomeData = {
+        waitQuestion: 0, // 待回答问答
+        waitExposure: 0, // 待审核曝光
+        waitComplaints: 0, // 待审核投诉
+        waitComplaintsProgress: 0, // 补充材料待处理
+    }
+
+    loading = false
+
+    @LoadingD('loading', 'getDataNext')
+    async getData() {
+        return await getAdminIndexData().catch((e) => console.log(e))
+    }
+    getDataNext(res) {
+        if (!res) {
+            this.$message.error('获取工作台数据失败')
+            return
+        }
+        this.dataForm = res.bodyMessage
+    }
+    jumpToList(path, oth?:any) {
+        const query =  { isFromHome: 'work' }
+        oth && Object.assign(query, oth)
+        this.$router.push({ path, query })
+    }
 }
 </script>
 
 <style scoped lang="less">
-.dashbord-title {
-  font-size: 24px;
-  margin: 10px 0;
+.power-title {
+    font-size: 24px;
+    font-weight: 500;
 }
-.dashbord-box {
-  margin-bottom: 20px;
+.home-item {
+    margin-top: 15px;
+    h3 {
+        width: 180px;
+        text-align: right;
+    }
+    .flex(flex-start);
+    .item-con {
+        margin-left: 30px;
+        padding: 20px 30px;
+        background: #409eff;
+        border-radius: 4px;
+        cursor: pointer;
+        .flex();
+        transition: 0.3s;
+        &:hover {
+            background: #2267ac;
+            box-shadow: 0 4px 5px rgba(0, 0, 0, 0.4);
+        }
+        &:active{
+            transform: scale(.9,.9);
+        }
+        p {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            &:last-child {
+                margin-left: 12px;
+                font-size: 26px;
+                font-weight: 700;
+            }
+        }
+    }
 }
 </style>

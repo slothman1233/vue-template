@@ -43,6 +43,12 @@ export interface ETimeModel extends BaseAdminInfo {
     // 推荐状态
     recommendStateText: string
     // 是否推荐
+    sort?:number
+    // 排序号
+    keyword:string
+    // 关键字
+    summary:string
+    // 摘要
 
     clickCount: number
     // 点击量

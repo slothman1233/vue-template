@@ -24,11 +24,10 @@ set-public-path
 filter => xxx.filter.ts
 mixin => xxx.mixin.ts
 service => XxxService.ts
+type => XxxData.ts // 专属数据模型
 component => XxxXxx/index.vue
 (以及该组件其他的拆分都在此目录自行消化)
 view => 同上
-
-PS:(多人合作时要写什么小轮子的时候 先去公共部分看看队友是不是造好了)
 ```
 —————————————————————————————————————————————————————————
 ```
@@ -56,55 +55,108 @@ set-public-path.ts 里面的路径要和package.json的项目名字一致
 ## 目录说明——(未说明的部分请参照 vue-cli 文档)
 
 ```
-├── postcss.config.js
-├── src
-│   ├── common
-│   │   ├── filters     // 公共过滤器
-│   │   ├── mixins      //` 公共Mixin
-│   │   │   ├── dialog.mixin.ts // 弹窗
-│   │   │   ├── page.mixin.ts  // 分页列表
-│   │   │   └── tool.mixin.ts  // 基础部分
-│   │   ├── services    // 接口存放
-│   │   │   ├── BaseService.d.ts // 共用基础参数类型声明
-│   │   │   └── UserService.ts   // 示例
-│   │   └── style      // 公共样式部分
-│   │       ├── listbox.less
-│   │       └── reset.less
-│   ├── components     // 公共组件
-│   │   ├── Breadcrumb // 面包屑
-│   │   │   └── index.vue
-│   │   ├── Dialog     // 公共弹窗存放
-│   │   ├── HeaderNav  // 头部
-│   │   │   ├── SelfInfo.vue
-│   │   │   └── index.vue
-│   │   ├── SideBar    // 侧边栏
-│   │   │   ├── Logo.vue
-│   │   │   ├── SideBarItem.vue
-│   │   │   ├── index.vue
-│   │   │   └── power.png
-│   │   └── Tabs       // 标签
-│   │       └── index.vue
-│   ├── layout         // 整体布局模板存放
-│   │   └── index.vue
-│   ├── set-public-path.ts   // 微前端模式路径调整
-│   ├── utils          // 工具部分
-│   │   ├── env.ts     // 环境变量相关部分
-│   │   ├── http       // 网络请求
-│   │   │   ├── axios.ts
-│   │   │   └── index.ts
-│   │   └── index.ts
-│   └── views          // 页面
-│       └── Home
-│           ├── components
-│           │   ├── Chart.vue
-│           │   ├── DashTab.vue
-│           │   └── UserInfo.vue
-│           ├── imgs
-│           │   └── avatar.jpg
-│           └── index.vue
-├── tests
-│   ├── __mocks__
-│   └── unit
+├── config
+│   ├── ex.config.js              webpack忽略配置
+│   └── plugins.config.js         webpackPlugin
+├── postcss.config.js             样式插件配置
+│   ├── common
+│   │   ├── config                公共配置部分
+│   │   │   ├── emoji.config.ts
+│   │   │   ├── tinymce.config.ts
+│   │   │   └── upload.config.ts
+│   │   ├── decorators            公共装饰器
+│   │   │   └── preposition.fn.decorator.ts
+│   │   ├── filters               vue2.x filters
+│   │   │   └── statusToUI.ts
+│   │   ├── mixins                vue2.x 采用mixin
+│   │   │   ├── dialog.mixin.ts
+│   │   │   ├── exposeAndComplaint.mixin.ts
+│   │   │   ├── page.mixin.ts
+│   │   │   └── tool.mixin.ts
+│   │   ├── plugins               插件存放
+│   │   │   ├── PreviewImg
+│   │   │   │   ├── index.ts
+│   │   │   │   └── preview.tsx
+│   │   │   └── base.ts
+│   │   ├── services              请求存放
+│   │   │   ├── ExposeService.ts
+│   │   │   └── RemoteService.ts
+│   │   ├── style                 样式存放，重点看完PublicDefind.less，(其他部分是遗留未剔除)
+│   │   │   ├── Animation.less
+│   │   │   ├── PublicDefind.less
+│   │   │   ├── adaptation.less
+│   │   │   ├── element-ui.less
+│   │   │   ├── font
+│   │   │   │   ├── iconfont.css
+│   │   │   │   ├── iconfont.eot
+│   │   │   │   ├── iconfont.svg
+│   │   │   │   ├── iconfont.ttf
+│   │   │   │   └── iconfont.woff
+│   │   │   ├── index.less
+│   │   │   ├── listbox.less
+│   │   │   ├── mixin.less
+│   │   │   ├── public
+│   │   │   │   └── public.less
+│   │   │   ├── reset.less
+│   │   │   ├── sidebar.less
+│   │   │   ├── transition.less
+│   │   │   └── variables.less
+│   │   └── type                数据类型存放
+│   │       ├── BarrageData.ts
+│   │       ├── BaseData.d.ts
+│   │       ├── BaseService.d.ts
+│   │       ├── CommentData.ts
+│   │       ├── ComplaintData.ts
+│   │       ├── ConfigData.ts
+│   │       ├── DealerData.ts
+│   │       ├── ExposeData.ts
+│   │       ├── QsData.ts
+│   │       ├── RemoteData.ts
+│   │       ├── UserData.ts
+│   │       └── VideoData.ts
+│   ├── components              公共组件
+│   │   ├── CanEditBtn.vue
+│   │   ├── HeaderNav           公共头部
+│   │   │   ├── SelfInfo.vue
+│   │   │   └── index.vue
+│   │   ├── SvgIcon             SVGicon深圳要求统一时拉取来的  只在登录页用了
+│   │   │   └── index.vue
+│   │   ├── TableRender.tsx     tsx版的表格封装
+│   │   ├── Upload.vue          图片上传
+│   │   ├── UploadVideo.vue     视频上传
+│   │   └── YesNNoTag.vue       是否组件
+│   ├── layout                    布局存放
+│   │   └── index.vue             基本布局视图
+│   ├── main.ts
+│   ├── router
+│   │   └── index.ts              路由注册
+│   ├── router-hooks-init.ts      路由钩子注册
+│   ├── set-public-path.ts        微前端路径注册
+│   ├── shims-tsx.d.ts
+│   ├── shims-vue.d.ts
+│   ├── store            VUEX
+│   │   ├── index.ts
+│   │   ├── modules
+│   │   │   ├── demo.ts
+│   │   │   └── index.ts
+│   │   ├── mutation-types.ts
+│   │   └── types.ts
+│   ├── utils        工具存放
+│   │   ├── env.ts
+│   │   ├── http
+│   │   │   └── index.ts
+│   │   ├── index.ts
+│   │   └── validate.ts
+│   └── views         页面存放
+│       ├── Home
+│       │   ├── components
+│       │   │   ├── Chart.vue
+│       │   │   ├── DashTab.vue
+│       │   │   └── UserInfo.vue
+│       │   ├── imgs
+│       │   │   └── avatar.jpg
+│       │   └── index.vue
+│       └── login.vue   登录页基本上不需要管
 ```
 
 ## Project setup

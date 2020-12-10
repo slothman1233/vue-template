@@ -1,5 +1,6 @@
 import { ExposeNQsNComplaintCommon } from './ComplaintData'
 import { BaseDataDisplayStatus } from './RemoteData'
+import { UserInfoModel } from './UserData'
 
 export interface ExposureModel extends BaseAdminInfo, ExposeNQsNComplaintCommon {
     // 曝光数据模型

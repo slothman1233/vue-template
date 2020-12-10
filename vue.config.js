@@ -3,11 +3,14 @@
 const path = require('path')
 const { externals, cdn } = require('./config/ex.config')
 const plugins = require('./config/plugins.config')
-
+const APP_NAME = require('./package.json').name
 ///是否是开发环境
 const debug = process.env.NODE_ENV !== 'production'
 const config = {
     configureWebpack: {
+        output: {
+            library: APP_NAME,
+        },
         devServer: {
             port: 9003,
             sockPort: 9003,
@@ -23,53 +26,34 @@ const config = {
                     secure: false,
                     changeOrigin: true,
                     pathRewrite: {
-                        '^/commentApi': ''
-                    }
+                        '^/commentApi': '',
+                    },
+                },
+                '/platApi': {
+                    target: 'https://testmsentapi.tostar.top/api',
+                    secure: false,
+                    changeOrigin: true,
+                    pathRewrite: {
+                        '^/platApi': '',
+                    },
                 },
                 '/upload': {
-                    target: 'https://imgs.wbp5.com/api',
+                    // target: 'https://imgs.wbp5.com/api',
+                    target: 'https://testfxchatimage.wbp5.com/api',
                     changeOrigin: true,
                     secure: false,
                     pathRewrite: {
-                        '^/upload': ''
-                    }
+                        '^/upload': '',
+                    },
                 },
             },
-            hot: true
+            hot: true,
         },
         plugins,
-        // devtool: debug ? 'cheap-module-eval-source-map' : '',
         externals,
-        optimization: {
-            // splitChunks: {
-            //     chunks: 'all',
-            //     minSize: 30000,
-            //     minChunks: 1,
-            //     maxAsyncRequests: 5,
-            //     maxInitialRequests: 3,
-            //     automaticNameDelimiter: '~',
-            //     name: true,
-            //     cacheGroups: {
-            //         vendors: {
-            //             name: "vendors",
-            //             test: /[\\/]node_modules[\\/]/,
-            //             minSize: 0,
-            //             priority: 2
-            //         },
-
-            //         default: {
-            //             name: "default",
-            //             minChunks: 2,
-            //             minSize: 0,
-            //             priority: -20,
-            //             reuseExistingChunk: true
-            //         },
-            //     }
-            // },
-        },
     },
-    chainWebpack: config => {
-        config.plugin('html').tap(args => {
+    chainWebpack: (config) => {
+        config.plugin('html').tap((args) => {
             // CDN
             if (debug) {
                 args[0].cdn = cdn.dev
@@ -92,7 +76,7 @@ const config = {
             .use('svg-sprite-loader')
             .loader('svg-sprite-loader')
             .options({
-                symbolId: 'icon-[name]'
+                symbolId: 'icon-[name]',
             })
             .end()
     },
@@ -105,15 +89,8 @@ const config = {
                 path.resolve(__dirname, './src/common/style/variables.less'),
             ],
         },
-        'less-loader': {
-            lessOptions: {
-                modifyVars: { 'menuText': '#bfcbd9' },
-                javascriptEnabled: true,
-            }
-        }
     },
     css: {
-
         // 配置高于chainWebpack中关于css loader的配置
         // modules: true, // 是否开启支持‘foo.module.css’样式
         extract: false, // 是否使用css分离插件 ExtractTextPlugin，采用独立样式文件载入，不采用<style>方式内联至html文件中

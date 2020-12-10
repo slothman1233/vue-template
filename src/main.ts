@@ -1,11 +1,5 @@
-/*
- * @Description:
- * @Version: 0.1
- * @Author: EveChee
- * @Date: 2020-08-18 11:05:55
- * @LastEditTime: 2020-09-24 10:59:04
- */
 import './set-public-path'
+import './router-hooks-init'
 import singleSpaVue from 'single-spa-vue-mfe'
 import Vue from 'vue'
 import App from './App.vue'
@@ -16,11 +10,13 @@ import '@stl/eve-vue2-lib/dist/EveVue2Lib.css'
 import ELEMENT from 'element-ui'
 import PreviewImg from '@/common/plugins/PreviewImg'
 import '@/common/icons'
+
+export const IS_MFE = (window as any).__SINGLE_SPA_MFE__ || false
+
 Vue.use(ELEMENT)
 Vue.use(PreviewImg)
 Vue.prototype.$ELEMENT = { size: 'mini' }
 Vue.config.productionTip = false
-
 
 const options = {
     router,
@@ -34,11 +30,12 @@ export const render = function() {
 }
 // 微前端模式
 export const vueLifeCycles = ({ el }: any) => {
-    return singleSpaVue({
+    const vm = singleSpaVue({
         Vue,
         appOptions: { ...options, el },
     })
+    return vm
 }
-if (!(<any>window).__SINGLE_SPA_MFE__) {
+if (!IS_MFE) {
     render()
 }
