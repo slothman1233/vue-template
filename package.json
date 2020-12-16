@@ -16,7 +16,7 @@
     "@babel/core": "^7.9.6",
     "@babel/plugin-proposal-function-bind": "^7.8.3",
     "@babel/polyfill": "^7.10.4",
-    "@stl/eve-vue2-lib": "0.1.24",
+    "@stl/eve-vue2-lib": "0.1.25",
     "@stl/power-plugin": "1.2.2",
     "@stl/request": "1.2.6",
     "@tinymce/tinymce-vue": "^3.2.2",
