@@ -3,7 +3,7 @@
  * @Version: 0.1
  * @Author: EveChee
  * @Date: 2020-07-14 17:50:06
- * @LastEditTime: 2020-11-09 11:05:23
+ * @LastEditTime: 2020-12-18 17:36:02
 -->
 <template>
     <el-upload
@@ -90,17 +90,13 @@ export default class Upload extends Vue {
         this.$message.error(`${filename}上传失败`)
     }
     onSuccess(res, file, fileList) {
-        res &&
-            this.change(
-                res.code === 0
-                    ? [
-                        {
-                            url: res.bodyMessage,
-                        },
-                    ]
-                    : fileList
-            )
         this.$delete(this.abortList, file.uid)
+        if (!res) {
+            return
+        }
+        const fileSelf = fileList.find(_ => file.uid === _.uid)
+        fileSelf.response = fileSelf.url = res
+        this.fileList = fileList
     }
     onProgress(event) {
         const num = event.percent
