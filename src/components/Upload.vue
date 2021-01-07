@@ -86,7 +86,8 @@ export default class Upload extends Vue {
     }
     handleError(err, file, fileList) {
         console.log(err)
-        const { name: filename } = file
+        const { name: filename, uid } = file
+        this.$delete(this.abortList, uid)
         this.$message.error(`${filename}上传失败`)
     }
     onSuccess(res, file, fileList) {
@@ -94,7 +95,7 @@ export default class Upload extends Vue {
         if (!res) {
             return
         }
-        const fileSelf = fileList.find(_ => file.uid === _.uid)
+        const fileSelf = fileList.find((_) => file.uid === _.uid)
         fileSelf.response = fileSelf.url = res
         this.fileList = fileList
     }

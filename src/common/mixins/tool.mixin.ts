@@ -233,6 +233,7 @@ export class HasUploadVideoInSlice extends Mixins(HasAbortList, TinyMce) {
         const { name: filename, uid } = file
         if (!file) {
             onError()
+            this.$delete(this.abortList, uid)
             return
         }
         const { res: initRes, chunks } = await this.uploadVideoInit(
@@ -243,6 +244,7 @@ export class HasUploadVideoInSlice extends Mixins(HasAbortList, TinyMce) {
         if (!initRes) {
             // 初始化失败
             this.uploadVideoInitError(ref, file, onError)
+            this.$delete(this.abortList, uid)
             return
         } else {
             // 初始化完成

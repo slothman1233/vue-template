@@ -38,7 +38,6 @@
                     name="pwd"
                     tabindex="2"
                     auto-complete="on"
-                    @keyup.enter.native="submitForm"
                 />
                 <span class="show-pwd" @click="showPwd">
                     <svg-icon
