@@ -1,3 +1,10 @@
+<!--
+ * @Description:
+ * @Version: 0.1
+ * @Author: EveChee
+ * @Date: 2020-08-18 11:05:55
+ * @LastEditTime: 2020-10-26 11:12:36
+-->
 <template>
   <div v-if="isExternal" :style="styleExternalIcon" class="svg-external-icon svg-icon" v-on="$listeners" />
   <svg v-else :class="svgClass" aria-hidden="true" v-on="$listeners">
@@ -45,7 +52,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .svg-icon {
   width: 1em;
   height: 1em;

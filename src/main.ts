@@ -1,22 +1,27 @@
 import './set-public-path'
+import './router-hooks-init'
 import singleSpaVue from 'single-spa-vue-mfe'
 import Vue from 'vue'
 import App from './App.vue'
-import router, { routes } from './router'
+import router from './router'
 import store from './store'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
 import '@/common/style/reset.less'
-// import '@/common/style/index.less'
+import '@stl/eve-vue2-lib/dist/EveVue2Lib.css'
+import ELEMENT from 'element-ui'
+import PreviewImg from '@/common/plugins/PreviewImg'
 import '@/common/icons'
 
-Vue.use(ElementUI)
+export const IS_MFE = (window as any).__SINGLE_SPA_MFE__ || false
+
+Vue.use(ELEMENT)
+Vue.use(PreviewImg)
+Vue.prototype.$ELEMENT = { size: 'mini' }
 Vue.config.productionTip = false
 
 const options = {
     router,
     store,
-    render: h => h(App),
+    render: (h: Function) => h(App),
 }
 
 // 独立渲染
@@ -25,11 +30,12 @@ export const render = function() {
 }
 // 微前端模式
 export const vueLifeCycles = ({ el }: any) => {
-    return singleSpaVue({
+    const vm = singleSpaVue({
         Vue,
         appOptions: { ...options, el },
     })
+    return vm
 }
-if (!(<any>window).__SINGLE_SPA_MFE__) {
+if (!IS_MFE) {
     render()
 }
